@@ -10,7 +10,7 @@ import { NamesEditor } from './components/NamesEditor'
 import { UpdateBanner } from './components/UpdateBanner'
 
 export function App() {
-  const { attendance, menu, setRange, generate, people } = useStore()
+  const { attendance, menu, setRange, generate, people, theme, toggleTheme } = useStore()
   const [start, setStart] = useState(attendance[0]?.date ?? '')
   const [days, setDays] = useState(7)
 
@@ -19,12 +19,24 @@ export function App() {
     document.title = `Menú setmanal · ${people.map((p) => p.name).join(' & ')}`
   }, [people])
 
+  // Apply the colour theme to the document root.
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+  }, [theme])
+
   return (
     <div className="app">
       <UpdateBanner />
       <header className="app-header">
         <h1>🍽️ Menú setmanal</h1>
         <NamesEditor />
+        <button
+          className="theme-btn"
+          title={theme === 'dark' ? 'Mode clar' : 'Mode fosc'}
+          onClick={toggleTheme}
+        >
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
       </header>
 
       <section className="card">

@@ -43,6 +43,19 @@ function newId(): string {
   return 'p-' + Math.random().toString(36).slice(2, 9)
 }
 
+const THEME_KEY = 'menu-theme'
+
+function loadTheme(): 'light' | 'dark' {
+  try {
+    const saved = localStorage.getItem(THEME_KEY)
+    if (saved === 'light' || saved === 'dark') return saved
+    if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) return 'dark'
+  } catch {
+    /* ignore */
+  }
+  return 'light'
+}
+
 function weekdayOf(iso: string): number {
   const [y, m, d] = iso.split('-').map(Number)
   return new Date(y, m - 1, d).getDay()
@@ -56,6 +69,9 @@ interface State {
   checkedGrocery: Set<string>
   /** The people (1–4), editable; persisted to localStorage. */
   people: PersonInfo[]
+  /** Colour theme; persisted to localStorage. */
+  theme: 'light' | 'dark'
+  toggleTheme: () => void
   setRange: (startISO: string, days: number) => void
   toggleAttendee: (date: string, slot: Slot, person: Person) => void
   generate: () => void
@@ -92,6 +108,14 @@ export const useStore = create<State>((set) => ({
   rerollSeed: 1,
   checkedGrocery: new Set(),
   people: initialPeople,
+  theme: loadTheme(),
+
+  toggleTheme: () =>
+    set((s) => {
+      const theme = s.theme === 'dark' ? 'light' : 'dark'
+      try { localStorage.setItem(THEME_KEY, theme) } catch { /* ignore */ }
+      return { theme }
+    }),
 
   setRange: (startISO, days) =>
     set((s) => ({ attendance: buildRange(startISO, days, s.people.map((p) => p.id)), menu: null })),
