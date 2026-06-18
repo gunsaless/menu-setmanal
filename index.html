@@ -9,9 +9,7 @@
       (function () {
         try {
           var t = localStorage.getItem('menu-theme')
-          if (t !== 'light' && t !== 'dark') {
-            t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-          }
+          if (t !== 'light' && t !== 'dark') t = 'dark' // dark by default
           document.documentElement.setAttribute('data-theme', t)
         } catch (e) {}
       })()

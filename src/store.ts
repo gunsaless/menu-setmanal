@@ -49,11 +49,10 @@ function loadTheme(): 'light' | 'dark' {
   try {
     const saved = localStorage.getItem(THEME_KEY)
     if (saved === 'light' || saved === 'dark') return saved
-    if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) return 'dark'
   } catch {
     /* ignore */
   }
-  return 'light'
+  return 'dark' // dark by default
 }
 
 function weekdayOf(iso: string): number {
