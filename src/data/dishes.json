@@ -45,12 +45,6 @@
         "category": "verdura-fruita"
       },
       {
-        "item": "oli d'oliva verge extra",
-        "unit": "cullerada",
-        "category": "herbes-condiments",
-        "scalable": false
-      },
-      {
         "item": "sal",
         "category": "herbes-condiments",
         "scalable": false
@@ -1293,8 +1287,8 @@
     ]
   },
   {
-    "id": "pinya-melo-pernil",
-    "name": "Pinya o meló amb pernil",
+    "id": "pinya-pernil",
+    "name": "Pinya amb pernil",
     "seasons": [
       "estiu"
     ],
@@ -1310,7 +1304,40 @@
     ],
     "ingredients": [
       {
-        "item": "pinya o meló",
+        "item": "pinya",
+        "qty": 0.5,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "pernil",
+        "qty": 80,
+        "unit": "g",
+        "category": "peix-carn",
+        "scalable": true
+      }
+    ]
+  },
+  {
+    "id": "melo-pernil",
+    "name": "Meló amb pernil",
+    "seasons": [
+      "estiu"
+    ],
+    "slots": [
+      "sopar"
+    ],
+    "servingsBase": 2,
+    "course": [
+      "primer"
+    ],
+    "tags": [
+      "amanida"
+    ],
+    "ingredients": [
+      {
+        "item": "meló",
         "qty": 0.5,
         "unit": "u",
         "category": "verdura-fruita",
@@ -2742,7 +2769,7 @@
   },
   {
     "id": "pop-planxa",
-    "name": "Pop a la planxa amb patata",
+    "name": "Pop a la planxa",
     "seasons": [
       "primavera",
       "estiu",
@@ -2769,20 +2796,7 @@
         "scalable": true
       },
       {
-        "item": "patata",
-        "qty": 2,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
         "item": "pebre vermell",
-        "category": "herbes-condiments",
-        "scalable": false
-      },
-      {
-        "item": "oli d'oliva verge extra",
-        "unit": "cullerada",
         "category": "herbes-condiments",
         "scalable": false
       }
