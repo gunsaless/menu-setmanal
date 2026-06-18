@@ -33,7 +33,7 @@ Per afegir un plat, copia un bloc existent a `dishes.json` i edita'l. Els camps:
 
 | camp | què és |
 |------|--------|
-| `seasons` | `estiu`, `final-estiu`, `tardor`, `hivern` |
+| `seasons` | una o més de: `primavera`, `estiu`, `tardor`, `hivern` (totes per a plats de tot l'any) |
 | `slots` | `dinar`, `sopar` |
 | `course` | `primer` (entrant) i/o `segon` (plat principal). Cada àpat es genera amb un primer + un segon |
 | `servingsBase` | per quantes racions són les quantitats d'ingredients |

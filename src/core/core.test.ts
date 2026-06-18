@@ -7,8 +7,9 @@ import type { AttendanceDay } from './types'
 describe('seasonForDate', () => {
   it('maps dates to seasons including winter wrap', () => {
     expect(seasonForDate('2026-01-10')).toBe('hivern')
+    expect(seasonForDate('2025-04-20')).toBe('primavera')
     expect(seasonForDate('2025-07-20')).toBe('estiu')
-    expect(seasonForDate('2025-09-20')).toBe('final-estiu')
+    expect(seasonForDate('2025-09-20')).toBe('estiu')
     expect(seasonForDate('2025-11-05')).toBe('tardor')
   })
 })

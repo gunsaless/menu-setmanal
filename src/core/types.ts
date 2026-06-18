@@ -1,7 +1,7 @@
 // ─── Domain types ───────────────────────────────────────────────────────────
 // These describe the editable database (src/data/*.json) and the generated menu.
 
-export type Season = 'estiu' | 'final-estiu' | 'tardor' | 'hivern'
+export type Season = 'primavera' | 'estiu' | 'tardor' | 'hivern'
 
 /** Meal slots that the generator decides. Breakfast/snacks are fixed routines. */
 export type Slot = 'dinar' | 'sopar'

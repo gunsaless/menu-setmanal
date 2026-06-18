@@ -3,8 +3,8 @@
     "id": "tallarines-carbasso-pesto",
     "name": "Tallarines de carbassó al pesto",
     "seasons": [
-      "estiu",
-      "final-estiu"
+      "primavera",
+      "estiu"
     ],
     "slots": [
       "dinar"
@@ -65,8 +65,8 @@
     "id": "sepia-planxa-all-julivert",
     "name": "Sèpia o calamar a la planxa amb all i julivert",
     "seasons": [
+      "primavera",
       "estiu",
-      "final-estiu",
       "tardor",
       "hivern"
     ],
@@ -114,8 +114,8 @@
     "id": "peix-forn-papillota",
     "name": "Peix al forn o papillota amb verdures",
     "seasons": [
+      "primavera",
       "estiu",
-      "final-estiu",
       "tardor",
       "hivern"
     ],
@@ -158,8 +158,8 @@
     "id": "amanida-completa",
     "name": "Amanida completa (enciam, llegums, tomàquet, pebrot, fruita)",
     "seasons": [
+      "primavera",
       "estiu",
-      "final-estiu",
       "tardor"
     ],
     "slots": [
@@ -210,8 +210,7 @@
     "id": "gaspatxo-alvocat",
     "name": "Gaspatxo amb alvocat",
     "seasons": [
-      "estiu",
-      "final-estiu"
+      "estiu"
     ],
     "slots": [
       "dinar",
@@ -274,8 +273,8 @@
     "id": "pollastre-planxa-verdures",
     "name": "Pollastre a la planxa amb verdures o cruditès",
     "seasons": [
+      "primavera",
       "estiu",
-      "final-estiu",
       "tardor",
       "hivern"
     ],
@@ -311,8 +310,7 @@
     "id": "crema-freda-cogombre-alvocat",
     "name": "Crema freda de cogombre i alvocat",
     "seasons": [
-      "estiu",
-      "final-estiu"
+      "estiu"
     ],
     "slots": [
       "dinar",
@@ -361,9 +359,10 @@
     "id": "quinoa-arros-verdures-fruits-secs",
     "name": "Quinoa o arròs integral amb verdures saltejades i fruits secs",
     "seasons": [
+      "primavera",
       "estiu",
-      "final-estiu",
-      "tardor"
+      "tardor",
+      "hivern"
     ],
     "slots": [
       "dinar"
@@ -405,8 +404,8 @@
     "id": "remenat-xampinyons-carbasso",
     "name": "Remenat de xampinyons o carbassó",
     "seasons": [
+      "primavera",
       "estiu",
-      "final-estiu",
       "tardor"
     ],
     "slots": [
@@ -442,8 +441,8 @@
     "id": "graellada-verdures",
     "name": "Graellada de verdures",
     "seasons": [
+      "primavera",
       "estiu",
-      "final-estiu",
       "tardor",
       "hivern"
     ],
@@ -473,8 +472,8 @@
     "id": "carn-peix-amanida",
     "name": "Carn o peix (planxa o papillota) amb amanida",
     "seasons": [
+      "primavera",
       "estiu",
-      "final-estiu",
       "tardor",
       "hivern"
     ],
@@ -512,8 +511,8 @@
     "id": "crema-verdures",
     "name": "Crema de verdures",
     "seasons": [
+      "primavera",
       "estiu",
-      "final-estiu",
       "tardor",
       "hivern"
     ],
@@ -550,7 +549,8 @@
     "id": "salmo-planxa-esparrecs",
     "name": "Salmó a la planxa amb espàrrecs",
     "seasons": [
-      "final-estiu",
+      "primavera",
+      "estiu",
       "tardor",
       "hivern"
     ],
@@ -585,8 +585,8 @@
     "id": "wok-verdures-pollastre-gambes",
     "name": "Wok de verdures saltejades amb pollastre o gambes",
     "seasons": [
+      "primavera",
       "estiu",
-      "final-estiu",
       "tardor",
       "hivern"
     ],
@@ -622,8 +622,8 @@
     "id": "amanida-canonge-tomaquet",
     "name": "Amanida de canonge amb tomàquet, alvocat, poma i fruits secs + ou dur",
     "seasons": [
+      "primavera",
       "estiu",
-      "final-estiu",
       "tardor",
       "hivern"
     ],
@@ -724,9 +724,9 @@
     "id": "espinacs-panses-pinyons",
     "name": "Espinacs amb panses, all i pinyons",
     "seasons": [
+      "primavera",
       "tardor",
-      "hivern",
-      "final-estiu"
+      "hivern"
     ],
     "slots": [
       "dinar"
@@ -767,9 +767,8 @@
     "id": "escalivada",
     "name": "Escalivada (pebrot, albergínia, ceba)",
     "seasons": [
-      "final-estiu",
-      "tardor",
-      "hivern"
+      "estiu",
+      "tardor"
     ],
     "slots": [
       "dinar"
@@ -858,9 +857,9 @@
     "id": "remenat-bolets-esparrecs",
     "name": "Remenat de bolets i espàrrecs verds",
     "seasons": [
+      "primavera",
       "tardor",
-      "hivern",
-      "final-estiu"
+      "hivern"
     ],
     "slots": [
       "dinar",
@@ -902,7 +901,8 @@
     "id": "hamburguesa",
     "name": "Hamburguesa (de pollastre o vedella) amb bròquil",
     "seasons": [
-      "final-estiu",
+      "primavera",
+      "estiu",
       "tardor",
       "hivern"
     ],
@@ -937,8 +937,8 @@
     "id": "esqueixada-salpico",
     "name": "Esqueixada o salpicó",
     "seasons": [
-      "estiu",
-      "final-estiu"
+      "primavera",
+      "estiu"
     ],
     "slots": [
       "dinar"
@@ -986,8 +986,9 @@
     "id": "musclos-vapor",
     "name": "Musclos al vapor",
     "seasons": [
+      "primavera",
       "estiu",
-      "final-estiu",
+      "tardor",
       "hivern"
     ],
     "slots": [
@@ -1060,8 +1061,8 @@
     "id": "lliure",
     "name": "Lliure",
     "seasons": [
+      "primavera",
       "estiu",
-      "final-estiu",
       "tardor",
       "hivern"
     ],

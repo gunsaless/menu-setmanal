@@ -15,8 +15,8 @@ export function seasonForDate(iso: string): Season {
 }
 
 export const SEASON_LABELS: Record<Season, string> = {
+  primavera: 'Primavera',
   estiu: 'Estiu',
-  'final-estiu': 'Final d\'estiu',
   tardor: 'Tardor',
   hivern: 'Hivern',
 }
