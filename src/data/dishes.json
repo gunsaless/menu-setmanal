@@ -156,7 +156,7 @@
   },
   {
     "id": "amanida-completa",
-    "name": "Amanida completa (enciam, llegums, tomàquet, pebrot, fruita)",
+    "name": "Amanida completa (enciam, llegums, tomàquet, pebrot)",
     "seasons": [
       "primavera",
       "estiu",
@@ -270,8 +270,8 @@
     ]
   },
   {
-    "id": "pollastre-planxa-verdures",
-    "name": "Pollastre a la planxa amb verdures o cruditès",
+    "id": "pollastre-planxa",
+    "name": "Pollastre a la planxa",
     "seasons": [
       "primavera",
       "estiu",
@@ -295,13 +295,6 @@
         "qty": 400,
         "unit": "g",
         "category": "peix-carn",
-        "scalable": true
-      },
-      {
-        "item": "verdures variades (carbassó, pebrot, ceba)",
-        "qty": 400,
-        "unit": "g",
-        "category": "verdura-fruita",
         "scalable": true
       }
     ]
@@ -385,9 +378,30 @@
         "scalable": true
       },
       {
-        "item": "verdures variades",
-        "qty": 400,
-        "unit": "g",
+        "item": "carbassó",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "pebrot",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "ceba",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "pastanaga",
+        "qty": 1,
+        "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
       },
@@ -460,9 +474,30 @@
     ],
     "ingredients": [
       {
-        "item": "verdures per graellar (albergínia, carbassó, pebrot, ceba)",
-        "qty": 600,
-        "unit": "g",
+        "item": "albergínia",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "carbassó",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "pebrot",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "ceba",
+        "qty": 1,
+        "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
       }
@@ -491,9 +526,30 @@
     ],
     "ingredients": [
       {
-        "item": "verdures variades (porro, carbassó, pastanaga, ceba)",
-        "qty": 700,
-        "unit": "g",
+        "item": "porro",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "carbassó",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "pastanaga",
+        "qty": 2,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "ceba",
+        "qty": 1,
+        "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
       },
@@ -557,9 +613,30 @@
     ],
     "ingredients": [
       {
-        "item": "col i verdures per saltejar",
-        "qty": 400,
-        "unit": "g",
+        "item": "col",
+        "qty": 0.25,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "pebrot",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "pastanaga",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "ceba",
+        "qty": 1,
+        "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
       },
@@ -666,9 +743,23 @@
         "scalable": true
       },
       {
-        "item": "verdures (pastanaga, ceba, pebrot)",
-        "qty": 400,
-        "unit": "g",
+        "item": "pastanaga",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "ceba",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "pebrot",
+        "qty": 1,
+        "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
       }
@@ -1101,9 +1192,23 @@
         "scalable": true
       },
       {
-        "item": "crudités (pastanaga, api, pebrot)",
-        "qty": 200,
-        "unit": "g",
+        "item": "pastanaga",
+        "qty": 2,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "api",
+        "qty": 2,
+        "unit": "branca",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "pebrot",
+        "qty": 1,
+        "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
       }
@@ -1172,8 +1277,8 @@
     ]
   },
   {
-    "id": "amanida-verda-formatge-gambes",
-    "name": "Amanida verda amb formatge fresc i gambes",
+    "id": "amanida-verda-formatge",
+    "name": "Amanida verda amb formatge fresc",
     "seasons": [
       "primavera",
       "estiu"
@@ -1186,8 +1291,7 @@
       "primer"
     ],
     "tags": [
-      "amanida",
-      "peix"
+      "amanida"
     ],
     "ingredients": [
       {
@@ -1202,13 +1306,6 @@
         "qty": 150,
         "unit": "g",
         "category": "lactics-ous",
-        "scalable": true
-      },
-      {
-        "item": "gambes",
-        "qty": 200,
-        "unit": "g",
-        "category": "peix-carn",
         "scalable": true
       }
     ]
@@ -1414,9 +1511,23 @@
         "scalable": true
       },
       {
-        "item": "crudités",
-        "qty": 200,
-        "unit": "g",
+        "item": "pastanaga",
+        "qty": 2,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "api",
+        "qty": 2,
+        "unit": "branca",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "pebrot",
+        "qty": 1,
+        "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
       }
@@ -1820,9 +1931,30 @@
     ],
     "ingredients": [
       {
-        "item": "verdures pel caldo (api, porro, pastanaga)",
-        "qty": 500,
-        "unit": "g",
+        "item": "api",
+        "qty": 2,
+        "unit": "branca",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "porro",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "pastanaga",
+        "qty": 2,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "ceba",
+        "qty": 1,
+        "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
       },
@@ -2103,9 +2235,23 @@
         "scalable": true
       },
       {
-        "item": "verdures",
-        "qty": 200,
-        "unit": "g",
+        "item": "enciam",
+        "qty": 0.5,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "tomàquet",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "ceba tendra",
+        "qty": 0.5,
+        "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
       },
@@ -2564,9 +2710,23 @@
         "scalable": true
       },
       {
-        "item": "verdures variades",
-        "qty": 400,
-        "unit": "g",
+        "item": "carbassó",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "pebrot",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "ceba",
+        "qty": 1,
+        "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
       },
@@ -3050,7 +3210,7 @@
         "scalable": true
       },
       {
-        "item": "ou",
+        "item": "ous",
         "qty": 1,
         "unit": "u",
         "category": "lactics-ous",
@@ -3316,9 +3476,23 @@
         "scalable": true
       },
       {
-        "item": "verdures saltejades (carbassó, pebrot, ceba)",
-        "qty": 400,
-        "unit": "g",
+        "item": "carbassó",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "pebrot",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "ceba",
+        "qty": 1,
+        "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
       },

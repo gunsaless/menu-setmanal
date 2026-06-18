@@ -65,8 +65,9 @@ table.menu td { text-align: left; vertical-align: top; }
 .grocery-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
 .grocery-cat h3 { font-size: .9rem; margin: 0 0 .4rem; color: var(--accent); }
 .grocery ul { list-style: none; padding: 0; margin: 0; }
-.grocery li { padding: .15rem 0; font-size: .9rem; }
-.grocery li label { flex-direction: row; align-items: center; gap: .4rem; color: var(--ink); cursor: pointer; }
+.grocery li { padding: .3rem 0; font-size: 1rem; }
+.grocery li label { flex-direction: row; align-items: center; gap: .55rem; color: var(--ink); cursor: pointer; }
+.grocery li input[type="checkbox"] { width: 1.15rem; height: 1.15rem; flex: 0 0 auto; }
 .grocery li label.checked { color: var(--muted); text-decoration: line-through; }
 .qty { color: var(--muted); }
 .nutrition .hint { margin: 0 0 .75rem; font-size: .85rem; color: var(--muted); }
@@ -95,5 +96,7 @@ table.menu td { text-align: left; vertical-align: top; }
   .course-label { flex-basis: 2.4rem; font-size: .6rem; }
   .reroll { padding: .15rem .3rem; font-size: .85rem; }
   .grocery-cols { grid-template-columns: 1fr; gap: .6rem; }
+  .grocery li { padding: .5rem 0; font-size: 1.05rem; }
+  .grocery li input[type="checkbox"] { width: 1.35rem; height: 1.35rem; }
   button.primary { width: 100%; }
 }

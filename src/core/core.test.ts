@@ -142,7 +142,7 @@ describe('checkNutrition', () => {
       days: [
         {
           date: '2026-07-15',
-          dinar: { slot: 'dinar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'pollastre-planxa-verdures' },
+          dinar: { slot: 'dinar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'pollastre-planxa' },
           sopar: { slot: 'sopar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'salmo-planxa' },
         },
       ],
@@ -159,7 +159,7 @@ describe('checkNutrition', () => {
         {
           date: '2026-07-15',
           dinar: { slot: 'dinar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'salmo-planxa' },
-          sopar: { slot: 'sopar', attendees: ['adria'], primerId: 'gaspatxo-alvocat', segonId: 'pollastre-planxa-verdures' },
+          sopar: { slot: 'sopar', attendees: ['adria'], primerId: 'gaspatxo-alvocat', segonId: 'pollastre-planxa' },
         },
       ],
     }
@@ -178,7 +178,7 @@ describe('fixRule', () => {
       days: [
         {
           date: '2026-07-15',
-          dinar: { slot: 'dinar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'pollastre-planxa-verdures' },
+          dinar: { slot: 'dinar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'pollastre-planxa' },
           sopar: { slot: 'sopar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'salmo-planxa' },
         },
       ],
@@ -194,7 +194,7 @@ describe('fixRule', () => {
       days: [
         {
           date: '2026-07-15',
-          dinar: { slot: 'dinar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'pollastre-planxa-verdures' },
+          dinar: { slot: 'dinar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'pollastre-planxa' },
           sopar: { slot: 'sopar', attendees: ['adria'], primerId: 'gaspatxo-alvocat', segonId: 'hamburguesa' },
         },
       ],
@@ -202,6 +202,43 @@ describe('fixRule', () => {
     expect(checkNutrition(menu).find((r) => r.id === 'fish')!.status).toBe('warn')
     const fixed = fixRule(menu, 'fish')
     expect(checkNutrition(fixed).find((r) => r.id === 'fish')!.status).toBe('ok')
+  })
+
+  it('reduces red/processed meat when there is too much', () => {
+    const menu: WeeklyMenu = {
+      season: 'hivern',
+      days: [
+        {
+          date: '2026-01-12',
+          dinar: { slot: 'dinar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'xurrasco-planxa' },
+          sopar: { slot: 'sopar', attendees: ['adria'], primerId: 'crema-verdures', segonId: 'hamburguesa-vedella' },
+        },
+        {
+          date: '2026-01-13',
+          dinar: { slot: 'dinar', attendees: ['adria'], primerId: 'escalivada', segonId: 'arros-integral-costella' },
+          sopar: { slot: 'sopar', attendees: ['adria'], primerId: 'crema-porros', segonId: 'pollastre-planxa' },
+        },
+      ],
+    }
+    expect(checkNutrition(menu).find((r) => r.id === 'red-meat')!.status).toBe('warn')
+    const fixed = fixRule(menu, 'red-meat')
+    expect(checkNutrition(fixed).find((r) => r.id === 'red-meat')!.status).toBe('ok')
+  })
+
+  it('adds legumes when there are none', () => {
+    const menu: WeeklyMenu = {
+      season: 'hivern',
+      days: [
+        {
+          date: '2026-01-12',
+          dinar: { slot: 'dinar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'pollastre-planxa' },
+          sopar: { slot: 'sopar', attendees: ['adria'], primerId: 'crema-verdures', segonId: 'salmo-planxa' },
+        },
+      ],
+    }
+    expect(checkNutrition(menu).find((r) => r.id === 'legumes')!.status).toBe('warn')
+    const fixed = fixRule(menu, 'legumes')
+    expect(checkNutrition(fixed).find((r) => r.id === 'legumes')!.status).toBe('ok')
   })
 })
 
