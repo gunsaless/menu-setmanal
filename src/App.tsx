@@ -6,6 +6,7 @@ import { MenuView } from './components/MenuView'
 import { GroceryView } from './components/GroceryView'
 import { TextExport } from './components/TextExport'
 import { NamesEditor } from './components/NamesEditor'
+import { UpdateBanner } from './components/UpdateBanner'
 
 export function App() {
   const { attendance, menu, setRange, generate } = useStore()
@@ -14,6 +15,7 @@ export function App() {
 
   return (
     <div className="app">
+      <UpdateBanner />
       <header className="app-header">
         <h1>🍽️ Menú setmanal</h1>
         <NamesEditor />
