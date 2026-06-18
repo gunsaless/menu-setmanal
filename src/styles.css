@@ -41,6 +41,21 @@ table.menu td { text-align: left; vertical-align: top; }
 .who { align-self: flex-end; color: var(--muted); font-size: .75rem; padding-right: .4rem; }
 .reroll { padding: .2rem .4rem; font-size: .9rem; }
 .muted { color: var(--muted); }
+
+/* ── Dish picker modal ──────────────────────────────────────────────────── */
+.picker-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); display: flex; align-items: center; justify-content: center; padding: 1rem; z-index: 50; }
+.picker { background: var(--card); border-radius: 12px; width: min(440px, 100%); max-height: 80vh; display: flex; flex-direction: column; padding: 1rem; box-shadow: 0 8px 30px rgba(0,0,0,.2); }
+.picker-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: .6rem; }
+.picker-x { border: none; background: transparent; font-size: 1rem; padding: .2rem .4rem; }
+.picker-search { width: 100%; margin-bottom: .6rem; }
+.picker-list { list-style: none; padding: 0; margin: 0; overflow-y: auto; }
+.picker-list li { margin: 0; }
+.picker-list li button { display: flex; flex-direction: column; align-items: flex-start; width: 100%; text-align: left; border: none; border-bottom: 1px solid var(--line); border-radius: 0; padding: .5rem .25rem; background: transparent; }
+.picker-list li button:hover { background: #f3f3ef; }
+.picker-list li button.current { background: var(--home); }
+.picker-name { font-size: .95rem; }
+.picker-seasons { font-size: .72rem; color: var(--muted); }
+.picker-empty { padding: .5rem .25rem; }
 .grocery .hint { margin: 0 0 .75rem; font-size: .8rem; color: var(--muted); }
 .grocery-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
 .grocery-cat h3 { font-size: .9rem; margin: 0 0 .4rem; color: var(--accent); }
@@ -49,6 +64,13 @@ table.menu td { text-align: left; vertical-align: top; }
 .grocery li label { flex-direction: row; align-items: center; gap: .4rem; color: var(--ink); cursor: pointer; }
 .grocery li label.checked { color: var(--muted); text-decoration: line-through; }
 .qty { color: var(--muted); }
+.nutrition .hint { margin: 0 0 .75rem; font-size: .85rem; color: var(--muted); }
+.nutrition ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .5rem; }
+.nutrition li { display: flex; gap: .5rem; align-items: flex-start; }
+.nutrition .rule-icon { flex: 0 0 auto; }
+.nutrition .rule-text { display: flex; flex-direction: column; }
+.nutrition .rule-detail { color: var(--muted); font-size: .82rem; }
+.nutrition li.warn .rule-detail { color: #b06a00; }
 .export { display: flex; flex-direction: column; gap: 1rem; }
 .copybox .row { justify-content: space-between; margin: 0 0 .4rem; }
 .copybox textarea { width: 100%; font-family: ui-monospace, monospace; font-size: .85rem; border: 1px solid var(--line); border-radius: 8px; padding: .75rem; resize: vertical; }

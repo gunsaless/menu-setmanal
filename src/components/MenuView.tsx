@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { useStore } from '../store'
 import { dishById } from '../core/dishes'
-import type { PlannedMeal, Slot } from '../core/types'
+import { DishPicker } from './DishPicker'
+import type { Course, PlannedMeal, Slot } from '../core/types'
 
 const DAY_NAMES = ['Diumenge', 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte']
 function label(iso: string) {
@@ -8,24 +10,40 @@ function label(iso: string) {
   return `${DAY_NAMES[new Date(y, m - 1, d).getDay()]} ${d}/${m}`
 }
 
-function MealCell({ date, slot, meal }: { date: string; slot: Slot; meal: PlannedMeal }) {
+function CourseRow(
+  { date, slot, course, dishId }:
+  { date: string; slot: Slot; course: Course; dishId: string | null },
+) {
   const reroll = useStore((s) => s.reroll)
+  const setDish = useStore((s) => s.setDish)
+  const [picking, setPicking] = useState(false)
+  const dish = dishId ? dishById(dishId) : null
+  const cap = course === 'primer' ? 'Primer' : 'Segon'
+  return (
+    <div className="course">
+      <span className="course-label">{cap}</span>
+      <span className="course-name">{dish?.name ?? '—'}</span>
+      <button className="reroll" title={`Canviar ${course} a l'atzar`} onClick={() => reroll(date, slot, course)}>🎲</button>
+      <button className="reroll" title={`Triar ${course}`} onClick={() => setPicking(true)}>✏️</button>
+      {picking && (
+        <DishPicker
+          course={course}
+          currentId={dishId}
+          onPick={(id) => { setDish(date, slot, course, id); setPicking(false) }}
+          onClose={() => setPicking(false)}
+        />
+      )}
+    </div>
+  )
+}
+
+function MealCell({ date, slot, meal }: { date: string; slot: Slot; meal: PlannedMeal }) {
   const names = useStore((s) => s.names)
   if (meal.attendees.length === 0) return <span className="muted">— fora —</span>
-  const primer = meal.primerId ? dishById(meal.primerId) : null
-  const segon = meal.segonId ? dishById(meal.segonId) : null
   return (
     <div className="meal">
-      <div className="course">
-        <span className="course-label">Primer</span>
-        <span className="course-name">{primer?.name ?? '—'}</span>
-        <button className="reroll" title="Canviar primer" onClick={() => reroll(date, slot, 'primer')}>🎲</button>
-      </div>
-      <div className="course">
-        <span className="course-label">Segon</span>
-        <span className="course-name">{segon?.name ?? '—'}</span>
-        <button className="reroll" title="Canviar segon" onClick={() => reroll(date, slot, 'segon')}>🎲</button>
-      </div>
+      <CourseRow date={date} slot={slot} course="primer" dishId={meal.primerId} />
+      <CourseRow date={date} slot={slot} course="segon" dishId={meal.segonId} />
       <span className="who" title={meal.attendees.map((p) => names[p]).join(' + ')}>
         {meal.attendees.map((p) => names[p][0]?.toUpperCase()).join('+')}
       </span>
