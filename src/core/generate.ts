@@ -1,5 +1,5 @@
 import type {
-  AttendanceDay, Course, Dish, PlannedDay, PlannedMeal, Season, Slot, WeeklyMenu,
+  AttendanceDay, Course, Dish, Person, PlannedDay, PlannedMeal, Season, Slot, WeeklyMenu,
 } from './types'
 import { poolFor, dishById } from './dishes'
 import { seasonForDate } from './season'
@@ -33,15 +33,50 @@ function pickWeighted(
   return scored[0].d
 }
 
-function planMeal(
+/** Day of week for an ISO date (0 = Sunday … 6 = Saturday), in local time. */
+function weekday(iso: string): number {
+  const [y, m, d] = iso.split('-').map(Number)
+  return new Date(y, m - 1, d).getDay()
+}
+const SUN = 0
+const MON = 1
+
+/**
+ * Default fixed meals (the "first option" the generator proposes). The user can
+ * still reroll away from these. Returns null when no rule applies.
+ */
+function fixedMeal(
+  date: string,
   slot: Slot,
-  attendees: ('adria' | 'helena')[],
+  attendees: Person[],
+  season: Season,
+): { primerId: string; segonId: string } | null {
+  if (slot !== 'sopar') return null
+  const dow = weekday(date)
+  // Monday dinner, both at home → mongeta+pastanaga al vapor + salmó a la planxa.
+  if (dow === MON && attendees.length === 2) {
+    return { primerId: 'mongeta-pastanaga-vapor', segonId: 'salmo-planxa' }
+  }
+  // Sunday dinner, at least one at home → caldo/gaspatxo + pinya, by season.
+  if (dow === SUN && attendees.length >= 1) {
+    const cold = season === 'hivern' || season === 'tardor'
+    return { primerId: cold ? 'caldo-verdures' : 'gaspatxo-alvocat', segonId: 'pinya-natural' }
+  }
+  return null
+}
+
+function planMeal(
+  date: string,
+  slot: Slot,
+  attendees: Person[],
   season: Season,
   usedIds: string[],
   recentTags: string[],
   seed: number,
 ): PlannedMeal {
   if (attendees.length === 0) return { slot, attendees, primerId: null, segonId: null }
+  const fixed = fixedMeal(date, slot, attendees, season)
+  if (fixed) return { slot, attendees, ...fixed }
   const primer = pickWeighted(poolFor(season, slot, 'primer'), usedIds, recentTags, seed)
   // Exclude the just-picked starter so the main is a different dish.
   const segonUsed = primer ? [...usedIds, primer.id] : usedIds
@@ -65,10 +100,10 @@ export function generateMenu(
       (id) => dishById(id)?.tags ?? [],
     )
 
-    const dinar = planMeal('dinar', day.dinar, season, usedIds, recentTags, seed)
+    const dinar = planMeal(day.date, 'dinar', day.dinar, season, usedIds, recentTags, seed)
     seed += 2
     usedIds.push(...[dinar.primerId, dinar.segonId].filter(Boolean) as string[])
-    const sopar = planMeal('sopar', day.sopar, season, usedIds, recentTags, seed)
+    const sopar = planMeal(day.date, 'sopar', day.sopar, season, usedIds, recentTags, seed)
     seed += 2
     usedIds.push(...[sopar.primerId, sopar.segonId].filter(Boolean) as string[])
 

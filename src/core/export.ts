@@ -1,6 +1,6 @@
 import type { PlannedMeal, WeeklyMenu } from './types'
 import { dishById } from './dishes'
-import { buildGroceryList, CATEGORY_LABELS, type GroceryItem } from './grocery'
+import { buildGroceryList, CATEGORY_LABELS, groceryKey, type GroceryItem } from './grocery'
 import type { GroceryCategory } from './types'
 
 const DAY_NAMES = ['Diumenge', 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte']
@@ -32,13 +32,19 @@ export function menuToText(menu: WeeklyMenu): string {
   return lines.join('\n').trim()
 }
 
-/** WhatsApp-friendly plain-text grocery list. */
-export function groceryToText(menu: WeeklyMenu): string {
+/**
+ * WhatsApp-friendly plain-text grocery list.
+ * Items whose key is in `checked` (already-have-it) are omitted, and any
+ * category left empty is dropped entirely.
+ */
+export function groceryToText(menu: WeeklyMenu, checked?: Set<string>): string {
   const grouped = buildGroceryList(menu)
   const lines = ['🛒 *LLISTA DE LA COMPRA*', '']
   for (const cat of Object.keys(grouped) as GroceryCategory[]) {
+    const items = grouped[cat].filter((it) => !checked?.has(groceryKey(it)))
+    if (items.length === 0) continue
     lines.push(`*${CATEGORY_LABELS[cat]}*`)
-    for (const it of grouped[cat]) lines.push(`  • ${fmtItem(it)}`)
+    for (const it of items) lines.push(`  • ${fmtItem(it)}`)
     lines.push('')
   }
   return lines.join('\n').trim()

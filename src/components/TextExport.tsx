@@ -4,10 +4,12 @@ import { menuToText, groceryToText } from '../core/export'
 
 export function TextExport() {
   const menu = useStore((s) => s.menu)
+  const checked = useStore((s) => s.checkedGrocery)
   const [copied, setCopied] = useState('')
   if (!menu) return null
 
-  const text = `${menuToText(menu)}\n\n${groceryToText(menu)}`
+  // Items checked off in the grocery view are excluded from the export.
+  const text = `${menuToText(menu)}\n\n${groceryToText(menu, checked)}`
 
   const copy = async () => {
     await navigator.clipboard.writeText(text)

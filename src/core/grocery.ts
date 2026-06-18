@@ -8,6 +8,11 @@ export interface GroceryItem {
   category: GroceryCategory
 }
 
+/** Stable identity for a grocery item (used to track "already have it" checks). */
+export function groceryKey(it: GroceryItem): string {
+  return `${it.item}__${it.unit ?? ''}__${it.category}`
+}
+
 export const CATEGORY_LABELS: Record<GroceryCategory, string> = {
   'verdura-fruita': 'Verdura i fruita',
   'peix-carn': 'Peix i carn',
