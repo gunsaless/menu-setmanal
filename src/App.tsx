@@ -3,6 +3,7 @@ import { useStore } from './store'
 import { SEASON_LABELS, seasonForDate } from './core/season'
 import { AttendanceGrid } from './components/AttendanceGrid'
 import { MenuView } from './components/MenuView'
+import { NutritionView } from './components/NutritionView'
 import { GroceryView } from './components/GroceryView'
 import { TextExport } from './components/TextExport'
 import { NamesEditor } from './components/NamesEditor'
@@ -52,8 +53,9 @@ export function App() {
       {menu && (
         <>
           <section className="card"><h2>3. Menú</h2><MenuView /></section>
-          <section className="card"><h2>4. Llista de la compra</h2><GroceryView /></section>
-          <section className="card"><h2>5. Exportar (WhatsApp)</h2><TextExport /></section>
+          <section className="card"><h2>4. Anàlisi nutricional</h2><NutritionView /></section>
+          <section className="card"><h2>5. Llista de la compra</h2><GroceryView /></section>
+          <section className="card"><h2>6. Exportar (WhatsApp)</h2><TextExport /></section>
         </>
       )}
     </div>

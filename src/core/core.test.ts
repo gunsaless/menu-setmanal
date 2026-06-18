@@ -3,7 +3,8 @@ import { seasonForDate } from './season'
 import { generateMenu } from './generate'
 import { buildGroceryList, groceryKey } from './grocery'
 import { groceryToText, menuToText } from './export'
-import type { AttendanceDay } from './types'
+import { checkNutrition } from './nutrition'
+import type { AttendanceDay, WeeklyMenu } from './types'
 
 describe('seasonForDate', () => {
   it('maps dates to seasons including winter wrap', () => {
@@ -117,6 +118,42 @@ describe('menuToText', () => {
     ]
     const text = menuToText(generateMenu(att, 3))
     expect(text).toContain('Dinar _Adrià fora_')
+  })
+})
+
+describe('checkNutrition', () => {
+  it('flags a repeated dish in the week', () => {
+    const menu: WeeklyMenu = {
+      season: 'estiu',
+      days: [
+        {
+          date: '2026-07-15',
+          dinar: { slot: 'dinar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'pollastre-planxa-verdures' },
+          sopar: { slot: 'sopar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'salmo-planxa' },
+        },
+      ],
+    }
+    const unique = checkNutrition(menu).find((r) => r.id === 'unique')!
+    expect(unique.status).toBe('warn')
+    expect(unique.detail).toContain('Amanida verda')
+  })
+
+  it('passes unique check when all dishes differ, and returns all rule ids', () => {
+    const menu: WeeklyMenu = {
+      season: 'estiu',
+      days: [
+        {
+          date: '2026-07-15',
+          dinar: { slot: 'dinar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'salmo-planxa' },
+          sopar: { slot: 'sopar', attendees: ['adria'], primerId: 'gaspatxo-alvocat', segonId: 'pollastre-planxa-verdures' },
+        },
+      ],
+    }
+    const res = checkNutrition(menu)
+    expect(res.find((r) => r.id === 'unique')!.status).toBe('ok')
+    expect(res.map((r) => r.id)).toEqual(
+      expect.arrayContaining(['unique', 'protein-balance', 'fish', 'carbs', 'veggies']),
+    )
   })
 })
 

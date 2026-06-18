@@ -32,6 +32,8 @@ interface State {
   reroll: (date: string, slot: Slot, course: Course) => void
   toggleGrocery: (key: string) => void
   setName: (person: Person, name: string) => void
+  /** Manually set a specific dish for a meal's course (from the picker). */
+  setDish: (date: string, slot: Slot, course: Course, dishId: string) => void
 }
 
 function buildRange(startISO: string, days: number): AttendanceDay[] {
@@ -95,5 +97,15 @@ export const useStore = create<State>((set, get) => ({
         /* ignore unavailable storage */
       }
       return { names }
+    }),
+
+  setDish: (date, slot, course, dishId) =>
+    set((s) => {
+      if (!s.menu) return {}
+      const field = course === 'primer' ? 'primerId' : 'segonId'
+      const days = s.menu.days.map((d) =>
+        d.date === date ? { ...d, [slot]: { ...d[slot], [field]: dishId } } : d,
+      )
+      return { menu: { ...s.menu, days } }
     }),
 }))
