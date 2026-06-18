@@ -4,6 +4,7 @@ import { generateMenu } from './generate'
 import { buildGroceryList, groceryKey } from './grocery'
 import { groceryToText, menuToText } from './export'
 import { checkNutrition, fixRule } from './nutrition'
+import { dishById } from './dishes'
 import type { AttendanceDay, WeeklyMenu } from './types'
 
 describe('seasonForDate', () => {
@@ -48,6 +49,29 @@ describe('generateMenu', () => {
   })
 })
 
+describe('same-day protein variety', () => {
+  const PROT = ['peix', 'carn', 'ou', 'llegum']
+  const protOf = (id: string | null): string[] => {
+    const d = id ? dishById(id) : undefined
+    return d ? d.tags.filter((t) => PROT.includes(t)) : []
+  }
+
+  it('lunch and dinner mains do not share the same protein', () => {
+    // Tue–Fri (avoids the fixed Monday/Sunday dinners), both at home.
+    const att: AttendanceDay[] = ['2026-06-16', '2026-06-17', '2026-06-18', '2026-06-19'].map((date) => ({
+      date, dinar: ['adria', 'helena'], sopar: ['adria', 'helena'],
+    }))
+    const menu = generateMenu(att, 99)
+    for (const d of menu.days) {
+      const lunch = protOf(d.dinar.segonId)
+      const dinner = protOf(d.sopar.segonId)
+      if (lunch.length && dinner.length) {
+        expect(lunch.some((p: string) => dinner.includes(p))).toBe(false)
+      }
+    }
+  })
+})
+
 describe('buildGroceryList', () => {
   it('scales quantities by number of attendees', () => {
     const att = week()
@@ -68,6 +92,24 @@ describe('default fixed meals', () => {
     expect(menu.days[0].sopar.segonId).toBe('salmo-planxa')
   })
 
+  it('does not reuse the Monday fixed dishes elsewhere in the week', () => {
+    // Week starting Monday, everyone home → Monday sopar is mongeta + salmó.
+    const att: AttendanceDay[] = Array.from({ length: 7 }, (_, i) => ({
+      date: `2026-06-${15 + i}`, dinar: ['adria', 'helena'], sopar: ['adria', 'helena'],
+    }))
+    const menu = generateMenu(att, 5)
+    const reserved = ['mongeta-pastanaga-vapor', 'salmo-planxa']
+    menu.days.forEach((d, i) => {
+      for (const meal of [d.dinar, d.sopar]) {
+        for (const id of [meal.primerId, meal.segonId]) {
+          if (reserved.includes(id!)) {
+            expect(i === 0 && meal === d.sopar).toBe(true) // only Monday dinner
+          }
+        }
+      }
+    })
+  })
+
   it('Monday dinner with only one at home → not forced', () => {
     const att: AttendanceDay[] = [
       { date: '2026-06-15', dinar: [], sopar: ['adria'] },
@@ -81,7 +123,7 @@ describe('default fixed meals', () => {
       { date: '2026-06-21', dinar: [], sopar: ['helena'] }, // Sunday, estiu
     ]
     const menu = generateMenu(att, 7)
-    expect(menu.days[0].sopar.primerId).toBe('gaspatxo-alvocat')
+    expect(menu.days[0].sopar.primerId).toBe('gaspatxo')
     expect(menu.days[0].sopar.segonId).toBe('pinya-natural')
   })
 
@@ -159,7 +201,7 @@ describe('checkNutrition', () => {
         {
           date: '2026-07-15',
           dinar: { slot: 'dinar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'salmo-planxa' },
-          sopar: { slot: 'sopar', attendees: ['adria'], primerId: 'gaspatxo-alvocat', segonId: 'pollastre-planxa' },
+          sopar: { slot: 'sopar', attendees: ['adria'], primerId: 'gaspatxo', segonId: 'pollastre-planxa' },
         },
       ],
     }
@@ -195,7 +237,7 @@ describe('fixRule', () => {
         {
           date: '2026-07-15',
           dinar: { slot: 'dinar', attendees: ['adria'], primerId: 'amanida-verda', segonId: 'pollastre-planxa' },
-          sopar: { slot: 'sopar', attendees: ['adria'], primerId: 'gaspatxo-alvocat', segonId: 'hamburguesa' },
+          sopar: { slot: 'sopar', attendees: ['adria'], primerId: 'gaspatxo', segonId: 'hamburguesa-vedella' },
         },
       ],
     }

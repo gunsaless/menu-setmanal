@@ -42,8 +42,10 @@ table.menu td { text-align: left; vertical-align: top; }
 .course { display: flex; align-items: center; gap: .4rem; }
 .course-label { flex: 0 0 3.2rem; font-size: .65rem; text-transform: uppercase; letter-spacing: .03em; color: var(--accent); font-weight: 600; }
 .course-name { flex: 1; }
-/* Right padding matches the reroll button so the initials sit under the dice. */
-.who { align-self: flex-end; color: var(--muted); font-size: .75rem; padding-right: .4rem; }
+/* Fixed-width action column so the initials below can line up under it. */
+.course-actions { flex: 0 0 4.4rem; display: flex; gap: .25rem; justify-content: center; }
+.meal-foot { display: flex; }
+.who { flex: 0 0 4.4rem; margin-left: auto; text-align: center; color: var(--muted); font-size: .75rem; }
 .reroll { padding: .2rem .4rem; font-size: .9rem; }
 .muted { color: var(--muted); }
 
