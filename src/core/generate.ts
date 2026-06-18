@@ -39,11 +39,16 @@ function planMeal(
   return { slot, attendees, dishId: dish?.id ?? null }
 }
 
-export function generateMenu(attendance: AttendanceDay[]): WeeklyMenu {
+export function generateMenu(
+  attendance: AttendanceDay[],
+  // Base seed for the pseudo-random picks. Defaults to a random value so each
+  // generation differs; pass an explicit seed when you need reproducibility (tests).
+  baseSeed: number = Math.floor(Math.random() * 1e9),
+): WeeklyMenu {
   const season = attendance.length ? seasonForDate(attendance[0].date) : 'estiu'
   const usedIds: string[] = []
   const days: PlannedDay[] = []
-  let seed = attendance.length
+  let seed = baseSeed
 
   for (const day of attendance) {
     const recentTags = days
