@@ -16,12 +16,22 @@ export type Tag =
   | 'peix' | 'carn' | 'llegum' | 'ou' | 'crema' | 'amanida'
   | 'verdura' | 'vegetaria' | 'lliure'
 
-export type Person = 'adria' | 'helena'
+/** A person id (e.g. 'adria', or a generated id for added people). */
+export type Person = string
 
-export const PEOPLE: Person[] = ['adria', 'helena']
+export interface PersonInfo {
+  id: Person
+  name: string
+}
 
-/** Default display names; the user can override these in the UI. */
-export const DEFAULT_NAMES: Record<Person, string> = { adria: 'Adrià', helena: 'Helena' }
+export const MIN_PEOPLE = 1
+export const MAX_PEOPLE = 4
+
+/** Default people; editable (rename / add / remove) in the UI. */
+export const DEFAULT_PEOPLE: PersonInfo[] = [
+  { id: 'adria', name: 'Adrià' },
+  { id: 'helena', name: 'Helena' },
+]
 
 export interface Ingredient {
   item: string

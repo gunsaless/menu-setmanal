@@ -10,14 +10,14 @@ import { NamesEditor } from './components/NamesEditor'
 import { UpdateBanner } from './components/UpdateBanner'
 
 export function App() {
-  const { attendance, menu, setRange, generate, names } = useStore()
+  const { attendance, menu, setRange, generate, people } = useStore()
   const [start, setStart] = useState(attendance[0]?.date ?? '')
   const [days, setDays] = useState(7)
 
   // Keep the browser tab title in sync with the chosen names.
   useEffect(() => {
-    document.title = `Menú setmanal · ${names.adria} & ${names.helena}`
-  }, [names])
+    document.title = `Menú setmanal · ${people.map((p) => p.name).join(' & ')}`
+  }, [people])
 
   return (
     <div className="app">

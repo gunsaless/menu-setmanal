@@ -24,12 +24,12 @@ function CopyBox({ title, text, rows }: { title: string; text: string; rows: num
 export function TextExport() {
   const menu = useStore((s) => s.menu)
   const checked = useStore((s) => s.checkedGrocery)
-  const names = useStore((s) => s.names)
+  const people = useStore((s) => s.people)
   if (!menu) return null
 
   return (
     <div className="export">
-      <CopyBox title="Menú" text={menuToText(menu, names)} rows={12} />
+      <CopyBox title="Menú" text={menuToText(menu, people)} rows={12} />
       {/* Items checked off in the grocery view are excluded from this list. */}
       <CopyBox title="Llista de la compra" text={groceryToText(menu, checked)} rows={12} />
     </div>

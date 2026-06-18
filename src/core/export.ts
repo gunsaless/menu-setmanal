@@ -1,5 +1,5 @@
-import type { Person, PlannedMeal, WeeklyMenu } from './types'
-import { DEFAULT_NAMES } from './types'
+import type { PersonInfo, PlannedMeal, WeeklyMenu } from './types'
+import { DEFAULT_PEOPLE } from './types'
 import { dishById } from './dishes'
 import { buildGroceryList, CATEGORY_LABELS, groceryKey, type GroceryItem } from './grocery'
 import type { GroceryCategory } from './types'
@@ -25,22 +25,24 @@ function dishName(id: string | null): string {
  *   Dinar:
  *   - Amanida tomàquet
  *   - Pollastre planxa
- * Both out → "Sopar _Fora_" (no dishes). One out → "Sopar _Adrià fora_" + dishes.
+ * Both/all out → "Sopar _Fora_" (no dishes). Some out → "Sopar _Adrià fora_" + dishes.
  */
-function mealBlock(label: string, meal: PlannedMeal, names: Record<Person, string>): string[] {
+function mealBlock(label: string, meal: PlannedMeal, people: PersonInfo[]): string[] {
   if (meal.attendees.length === 0) return [`${label} _Fora_`]
-  const absent = (['adria', 'helena'] as Person[]).filter((p) => !meal.attendees.includes(p))
-  const header = absent.length === 1 ? `${label} _${names[absent[0]]} fora_` : `${label}:`
+  const absent = people.filter((p) => !meal.attendees.includes(p.id))
+  const header = absent.length > 0
+    ? `${label} _${absent.map((p) => p.name).join(', ')} fora_`
+    : `${label}:`
   return [header, `- ${dishName(meal.primerId)}`, `- ${dishName(meal.segonId)}`]
 }
 
 /** WhatsApp-friendly plain-text menu. */
-export function menuToText(menu: WeeklyMenu, names: Record<Person, string> = DEFAULT_NAMES): string {
+export function menuToText(menu: WeeklyMenu, people: PersonInfo[] = DEFAULT_PEOPLE): string {
   const lines: string[] = []
   for (const day of menu.days) {
     lines.push(dayHeader(day.date))
-    lines.push(...mealBlock('Dinar', day.dinar, names))
-    lines.push(...mealBlock('Sopar', day.sopar, names))
+    lines.push(...mealBlock('Dinar', day.dinar, people))
+    lines.push(...mealBlock('Sopar', day.sopar, people))
     lines.push('')
   }
   return lines.join('\n').trim()

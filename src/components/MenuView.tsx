@@ -38,14 +38,15 @@ function CourseRow(
 }
 
 function MealCell({ date, slot, meal }: { date: string; slot: Slot; meal: PlannedMeal }) {
-  const names = useStore((s) => s.names)
+  const people = useStore((s) => s.people)
   if (meal.attendees.length === 0) return <span className="muted">— fora —</span>
+  const nameOf = (id: string) => people.find((p) => p.id === id)?.name ?? id
   return (
     <div className="meal">
       <CourseRow date={date} slot={slot} course="primer" dishId={meal.primerId} />
       <CourseRow date={date} slot={slot} course="segon" dishId={meal.segonId} />
-      <span className="who" title={meal.attendees.map((p) => names[p]).join(' + ')}>
-        {meal.attendees.map((p) => names[p][0]?.toUpperCase()).join('+')}
+      <span className="who" title={meal.attendees.map(nameOf).join(' + ')}>
+        {meal.attendees.map((p) => nameOf(p)[0]?.toUpperCase()).join('+')}
       </span>
     </div>
   )

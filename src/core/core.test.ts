@@ -119,6 +119,20 @@ describe('menuToText', () => {
     const text = menuToText(generateMenu(att, 3))
     expect(text).toContain('Dinar _Adrià fora_')
   })
+
+  it('supports a custom list of people (1–4) with multiple absents', () => {
+    const people = [
+      { id: 'a', name: 'Anna' },
+      { id: 'b', name: 'Bru' },
+      { id: 'c', name: 'Cesc' },
+    ]
+    const att: AttendanceDay[] = [
+      { date: '2026-06-16', dinar: ['a'], sopar: [] },
+    ]
+    const text = menuToText(generateMenu(att, 3, people.length), people)
+    expect(text).toContain('Dinar _Bru, Cesc fora_') // two of three out
+    expect(text).toContain('Sopar _Fora_') // everyone out
+  })
 })
 
 describe('checkNutrition', () => {

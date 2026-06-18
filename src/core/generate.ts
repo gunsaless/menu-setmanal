@@ -50,11 +50,12 @@ function fixedMeal(
   slot: Slot,
   attendees: Person[],
   season: Season,
+  peopleCount: number,
 ): { primerId: string; segonId: string } | null {
   if (slot !== 'sopar') return null
   const dow = weekday(date)
-  // Monday dinner, both at home → mongeta+pastanaga al vapor + salmó a la planxa.
-  if (dow === MON && attendees.length === 2) {
+  // Monday dinner, everyone at home → mongeta+pastanaga al vapor + salmó a la planxa.
+  if (dow === MON && attendees.length === peopleCount) {
     return { primerId: 'mongeta-pastanaga-vapor', segonId: 'salmo-planxa' }
   }
   // Sunday dinner, at least one at home → caldo/gaspatxo + pinya, by season.
@@ -73,9 +74,10 @@ function planMeal(
   usedIds: string[],
   recentTags: string[],
   seed: number,
+  peopleCount: number,
 ): PlannedMeal {
   if (attendees.length === 0) return { slot, attendees, primerId: null, segonId: null }
-  const fixed = fixedMeal(date, slot, attendees, season)
+  const fixed = fixedMeal(date, slot, attendees, season, peopleCount)
   if (fixed) return { slot, attendees, ...fixed }
   const primer = pickWeighted(poolFor(season, slot, 'primer'), usedIds, recentTags, seed)
   // Exclude the just-picked starter so the main is a different dish.
@@ -89,6 +91,8 @@ export function generateMenu(
   // Base seed for the pseudo-random picks. Defaults to a random value so each
   // generation differs; pass an explicit seed when you need reproducibility (tests).
   baseSeed: number = Math.floor(Math.random() * 1e9),
+  // How many people there are in total (used by the "everyone home" rule).
+  peopleCount: number = 2,
 ): WeeklyMenu {
   const season = attendance.length ? seasonForDate(attendance[0].date) : 'estiu'
   const usedIds: string[] = []
@@ -100,10 +104,10 @@ export function generateMenu(
       (id) => dishById(id)?.tags ?? [],
     )
 
-    const dinar = planMeal(day.date, 'dinar', day.dinar, season, usedIds, recentTags, seed)
+    const dinar = planMeal(day.date, 'dinar', day.dinar, season, usedIds, recentTags, seed, peopleCount)
     seed += 2
     usedIds.push(...[dinar.primerId, dinar.segonId].filter(Boolean) as string[])
-    const sopar = planMeal(day.date, 'sopar', day.sopar, season, usedIds, recentTags, seed)
+    const sopar = planMeal(day.date, 'sopar', day.sopar, season, usedIds, recentTags, seed, peopleCount)
     seed += 2
     usedIds.push(...[sopar.primerId, sopar.segonId].filter(Boolean) as string[])
 
