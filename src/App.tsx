@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useStore } from './store'
 import { SEASON_LABELS, seasonForDate } from './core/season'
 import { AttendanceGrid } from './components/AttendanceGrid'
@@ -10,9 +10,14 @@ import { NamesEditor } from './components/NamesEditor'
 import { UpdateBanner } from './components/UpdateBanner'
 
 export function App() {
-  const { attendance, menu, setRange, generate } = useStore()
+  const { attendance, menu, setRange, generate, names } = useStore()
   const [start, setStart] = useState(attendance[0]?.date ?? '')
   const [days, setDays] = useState(7)
+
+  // Keep the browser tab title in sync with the chosen names.
+  useEffect(() => {
+    document.title = `Menú setmanal · ${names.adria} & ${names.helena}`
+  }, [names])
 
   return (
     <div className="app">
