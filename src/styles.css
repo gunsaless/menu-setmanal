@@ -27,10 +27,12 @@ table.menu td { text-align: left; vertical-align: top; }
 .who { align-self: flex-end; color: var(--muted); font-size: .75rem; }
 .reroll { padding: .2rem .4rem; font-size: .9rem; }
 .muted { color: var(--muted); }
-.grocery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+.grocery .hint { margin: 0 0 .75rem; font-size: .8rem; color: var(--muted); }
+.grocery-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
 .grocery-cat h3 { font-size: .9rem; margin: 0 0 .4rem; color: var(--accent); }
 .grocery ul { list-style: none; padding: 0; margin: 0; }
 .grocery li { padding: .15rem 0; font-size: .9rem; }
-.grocery li label { flex-direction: row; align-items: center; gap: .4rem; color: var(--ink); }
+.grocery li label { flex-direction: row; align-items: center; gap: .4rem; color: var(--ink); cursor: pointer; }
+.grocery li label.checked { color: var(--muted); text-decoration: line-through; }
 .qty { color: var(--muted); }
 .export textarea { width: 100%; font-family: ui-monospace, monospace; font-size: .85rem; border: 1px solid var(--line); border-radius: 8px; padding: .75rem; }
