@@ -24,12 +24,13 @@ export function buildGroceryList(menu: WeeklyMenu): Record<GroceryCategory, Groc
 
   for (const day of menu.days) {
     for (const meal of [day.dinar, day.sopar]) {
-      if (!meal.dishId) continue
-      const dish = dishById(meal.dishId)
-      if (!dish || dish.free) continue
-      const factor = meal.attendees.length / dish.servingsBase
+      for (const dishId of [meal.primerId, meal.segonId]) {
+        if (!dishId) continue
+        const dish = dishById(dishId)
+        if (!dish || dish.free) continue
+        const factor = meal.attendees.length / dish.servingsBase
 
-      for (const ing of dish.ingredients) {
+        for (const ing of dish.ingredients) {
         const key = `${ing.item}__${ing.unit ?? ''}__${ing.category}`
         const addQty =
           ing.qty != null
@@ -47,6 +48,7 @@ export function buildGroceryList(menu: WeeklyMenu): Record<GroceryCategory, Groc
             unit: ing.unit,
             category: ing.category,
           })
+        }
         }
       }
     }

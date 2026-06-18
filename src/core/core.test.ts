@@ -21,13 +21,18 @@ const week = (): AttendanceDay[] =>
   }))
 
 describe('generateMenu', () => {
-  it('fills every meal with a dish in summer', () => {
+  it('fills every meal with a starter and a main in summer', () => {
     const menu = generateMenu(week())
     expect(menu.season).toBe('estiu')
     expect(menu.days).toHaveLength(7)
     for (const d of menu.days) {
-      expect(d.dinar.dishId).toBeTruthy()
-      expect(d.sopar.dishId).toBeTruthy()
+      expect(d.dinar.primerId).toBeTruthy()
+      expect(d.dinar.segonId).toBeTruthy()
+      expect(d.sopar.primerId).toBeTruthy()
+      expect(d.sopar.segonId).toBeTruthy()
+      // starter and main must be different dishes
+      expect(d.dinar.primerId).not.toBe(d.dinar.segonId)
+      expect(d.sopar.primerId).not.toBe(d.sopar.segonId)
     }
   })
 
@@ -35,7 +40,8 @@ describe('generateMenu', () => {
     const att = week()
     att[0].sopar = []
     const menu = generateMenu(att)
-    expect(menu.days[0].sopar.dishId).toBeNull()
+    expect(menu.days[0].sopar.primerId).toBeNull()
+    expect(menu.days[0].sopar.segonId).toBeNull()
   })
 })
 

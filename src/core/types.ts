@@ -6,6 +6,11 @@ export type Season = 'estiu' | 'final-estiu' | 'tardor' | 'hivern'
 /** Meal slots that the generator decides. Breakfast/snacks are fixed routines. */
 export type Slot = 'dinar' | 'sopar'
 
+/** Each meal has a starter (primer) and a main course (segon). */
+export type Course = 'primer' | 'segon'
+
+export const COURSES: Course[] = ['primer', 'segon']
+
 /** Coarse tags used to balance variety across the week. */
 export type Tag =
   | 'peix' | 'carn' | 'llegum' | 'ou' | 'crema' | 'amanida'
@@ -33,6 +38,8 @@ export interface Dish {
   seasons: Season[]
   slots: Slot[]
   servingsBase: number
+  /** Which course(s) this dish can serve as. A dish may work as both. */
+  course: Course[]
   tags: Tag[]
   ingredients: Ingredient[]
   steps?: string[]
@@ -50,7 +57,9 @@ export interface AttendanceDay {
 export interface PlannedMeal {
   slot: Slot
   attendees: Person[]
-  dishId: string | null // null = everyone out, skipped
+  /** Dish chosen for each course. null = nobody eats at home (meal skipped). */
+  primerId: string | null
+  segonId: string | null
 }
 
 export interface PlannedDay {
