@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { AttendanceDay, Person, Slot, WeeklyMenu } from './core/types'
+import type { AttendanceDay, Course, Person, Slot, WeeklyMenu } from './core/types'
 import { generateMenu, rerollMeal } from './core/generate'
 
 interface State {
@@ -9,7 +9,7 @@ interface State {
   setRange: (startISO: string, days: number) => void
   toggleAttendee: (date: string, slot: Slot, person: Person) => void
   generate: () => void
-  reroll: (date: string, slot: Slot) => void
+  reroll: (date: string, slot: Slot, course: Course) => void
 }
 
 function buildRange(startISO: string, days: number): AttendanceDay[] {
@@ -44,10 +44,10 @@ export const useStore = create<State>((set, get) => ({
 
   generate: () => set({ menu: generateMenu(get().attendance) }),
 
-  reroll: (date, slot) =>
+  reroll: (date, slot, course) =>
     set((s) => {
       if (!s.menu) return {}
       const seed = s.rerollSeed + 1
-      return { menu: rerollMeal(s.menu, date, slot, seed), rerollSeed: seed }
+      return { menu: rerollMeal(s.menu, date, slot, course, seed), rerollSeed: seed }
     }),
 }))

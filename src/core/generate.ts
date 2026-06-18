@@ -1,8 +1,15 @@
 import type {
-  AttendanceDay, Dish, PlannedDay, PlannedMeal, Season, Slot, WeeklyMenu,
+  AttendanceDay, Course, Dish, PlannedDay, PlannedMeal, Season, Slot, WeeklyMenu,
 } from './types'
 import { poolFor, dishById } from './dishes'
 import { seasonForDate } from './season'
+
+/** All dish ids chosen across a planned week (used to avoid repeats). */
+function chosenIds(days: PlannedDay[]): string[] {
+  return days
+    .flatMap((d) => [d.dinar.primerId, d.dinar.segonId, d.sopar.primerId, d.sopar.segonId])
+    .filter(Boolean) as string[]
+}
 
 /** Deterministic-but-shuffled pick driven by a seed so reruns vary. */
 function pickWeighted(
@@ -34,9 +41,12 @@ function planMeal(
   recentTags: string[],
   seed: number,
 ): PlannedMeal {
-  if (attendees.length === 0) return { slot, attendees, dishId: null }
-  const dish = pickWeighted(poolFor(season, slot), usedIds, recentTags, seed)
-  return { slot, attendees, dishId: dish?.id ?? null }
+  if (attendees.length === 0) return { slot, attendees, primerId: null, segonId: null }
+  const primer = pickWeighted(poolFor(season, slot, 'primer'), usedIds, recentTags, seed)
+  // Exclude the just-picked starter so the main is a different dish.
+  const segonUsed = primer ? [...usedIds, primer.id] : usedIds
+  const segon = pickWeighted(poolFor(season, slot, 'segon'), segonUsed, recentTags, seed + 1)
+  return { slot, attendees, primerId: primer?.id ?? null, segonId: segon?.id ?? null }
 }
 
 export function generateMenu(
@@ -51,42 +61,41 @@ export function generateMenu(
   let seed = baseSeed
 
   for (const day of attendance) {
-    const recentTags = days
-      .slice(-2)
-      .flatMap((d) => [d.dinar.dishId, d.sopar.dishId])
-      .filter(Boolean)
-      .flatMap((id) => dishById(id as string)?.tags ?? [])
+    const recentTags = chosenIds(days.slice(-2)).flatMap(
+      (id) => dishById(id)?.tags ?? [],
+    )
 
-    const dinar = planMeal('dinar', day.dinar, season, usedIds, recentTags, seed++)
-    if (dinar.dishId) usedIds.push(dinar.dishId)
-    const sopar = planMeal('sopar', day.sopar, season, usedIds, recentTags, seed++)
-    if (sopar.dishId) usedIds.push(sopar.dishId)
+    const dinar = planMeal('dinar', day.dinar, season, usedIds, recentTags, seed)
+    seed += 2
+    usedIds.push(...[dinar.primerId, dinar.segonId].filter(Boolean) as string[])
+    const sopar = planMeal('sopar', day.sopar, season, usedIds, recentTags, seed)
+    seed += 2
+    usedIds.push(...[sopar.primerId, sopar.segonId].filter(Boolean) as string[])
 
     days.push({ date: day.date, dinar, sopar })
   }
   return { season, days }
 }
 
-/** Re-pick a single meal, excluding its current dish and others used that week. */
+/** Re-pick a single course of a single meal, avoiding dishes used that week. */
 export function rerollMeal(
   menu: WeeklyMenu,
   date: string,
   slot: Slot,
+  course: Course,
   seed: number,
 ): WeeklyMenu {
-  const usedIds = menu.days
-    .flatMap((d) => [d.dinar.dishId, d.sopar.dishId])
-    .filter(Boolean) as string[]
+  const usedIds = chosenIds(menu.days)
+  const field = course === 'primer' ? 'primerId' : 'segonId'
 
   const days = menu.days.map((d) => {
     if (d.date !== date) return d
     const meal = d[slot]
     if (meal.attendees.length === 0) return d
-    const pool = poolFor(menu.season, slot).filter((x) => x.id !== meal.dishId)
-    const next = pool.length
-      ? pickFromExcluding(pool, usedIds, seed)
-      : null
-    return { ...d, [slot]: { ...meal, dishId: next?.id ?? meal.dishId } }
+    const current = meal[field]
+    const pool = poolFor(menu.season, slot, course).filter((x) => x.id !== current)
+    const next = pool.length ? pickFromExcluding(pool, usedIds, seed) : null
+    return { ...d, [slot]: { ...meal, [field]: next?.id ?? current } }
   })
   return { ...menu, days }
 }

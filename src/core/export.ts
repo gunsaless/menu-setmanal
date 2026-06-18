@@ -1,4 +1,4 @@
-import type { WeeklyMenu } from './types'
+import type { PlannedMeal, WeeklyMenu } from './types'
 import { dishById } from './dishes'
 import { buildGroceryList, CATEGORY_LABELS, type GroceryItem } from './grocery'
 import type { GroceryCategory } from './types'
@@ -15,13 +15,18 @@ function dishName(id: string | null): string {
   return dishById(id)?.name ?? id
 }
 
+/** "Primer / Segon" one-liner for a meal. */
+function mealText(meal: PlannedMeal): string {
+  return `${dishName(meal.primerId)} / ${dishName(meal.segonId)}`
+}
+
 /** WhatsApp-friendly plain-text menu. */
 export function menuToText(menu: WeeklyMenu): string {
   const lines = ['🍽️ *MENÚ SETMANAL*', '']
   for (const day of menu.days) {
     lines.push(`*${dayLabel(day.date)}*`)
-    if (day.dinar.attendees.length) lines.push(`  🥗 Dinar: ${dishName(day.dinar.dishId)}`)
-    if (day.sopar.attendees.length) lines.push(`  🌙 Sopar: ${dishName(day.sopar.dishId)}`)
+    if (day.dinar.attendees.length) lines.push(`  🥗 Dinar: ${mealText(day.dinar)}`)
+    if (day.sopar.attendees.length) lines.push(`  🌙 Sopar: ${mealText(day.sopar)}`)
     lines.push('')
   }
   return lines.join('\n').trim()

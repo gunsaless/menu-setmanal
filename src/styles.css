@@ -19,10 +19,12 @@ table.grid th, table.grid td { border: 1px solid var(--line); padding: .4rem .5r
 table.grid th.sub { font-weight: 400; color: var(--muted); font-size: .75rem; }
 .chip { border: none; background: transparent; font-size: 1.1rem; padding: .2rem; }
 .chip.out { opacity: .45; }
-table.menu td { text-align: left; }
-.meal { display: flex; align-items: center; gap: .5rem; }
-.meal > span:first-child { flex: 1; }
-.who { color: var(--muted); font-size: .75rem; }
+table.menu td { text-align: left; vertical-align: top; }
+.meal { display: flex; flex-direction: column; gap: .35rem; }
+.course { display: flex; align-items: center; gap: .4rem; }
+.course-label { flex: 0 0 3.2rem; font-size: .65rem; text-transform: uppercase; letter-spacing: .03em; color: var(--accent); font-weight: 600; }
+.course-name { flex: 1; }
+.who { align-self: flex-end; color: var(--muted); font-size: .75rem; }
 .reroll { padding: .2rem .4rem; font-size: .9rem; }
 .muted { color: var(--muted); }
 .grocery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }

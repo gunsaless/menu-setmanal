@@ -11,12 +11,21 @@ function label(iso: string) {
 function MealCell({ date, slot, meal }: { date: string; slot: Slot; meal: PlannedMeal }) {
   const reroll = useStore((s) => s.reroll)
   if (meal.attendees.length === 0) return <span className="muted">— fora —</span>
-  const dish = meal.dishId ? dishById(meal.dishId) : null
+  const primer = meal.primerId ? dishById(meal.primerId) : null
+  const segon = meal.segonId ? dishById(meal.segonId) : null
   return (
     <div className="meal">
-      <span>{dish?.name ?? '—'}</span>
+      <div className="course">
+        <span className="course-label">Primer</span>
+        <span className="course-name">{primer?.name ?? '—'}</span>
+        <button className="reroll" title="Canviar primer" onClick={() => reroll(date, slot, 'primer')}>🎲</button>
+      </div>
+      <div className="course">
+        <span className="course-label">Segon</span>
+        <span className="course-name">{segon?.name ?? '—'}</span>
+        <button className="reroll" title="Canviar segon" onClick={() => reroll(date, slot, 'segon')}>🎲</button>
+      </div>
       <span className="who">{meal.attendees.map((p) => (p === 'adria' ? 'A' : 'H')).join('+')}</span>
-      <button className="reroll" title="Canviar plat" onClick={() => reroll(date, slot)}>🎲</button>
     </div>
   )
 }
