@@ -62,8 +62,8 @@
     ]
   },
   {
-    "id": "sepia-planxa-all-julivert",
-    "name": "Sèpia o calamar a la planxa amb all i julivert",
+    "id": "sepia-planxa",
+    "name": "Sèpia a la planxa amb all i julivert",
     "seasons": [
       "primavera",
       "estiu",
@@ -83,7 +83,7 @@
     ],
     "ingredients": [
       {
-        "item": "sèpia o calamar",
+        "item": "sèpia",
         "qty": 400,
         "unit": "g",
         "category": "peix-carn",
@@ -100,13 +100,48 @@
         "qty": 1,
         "unit": "grapat",
         "category": "herbes-condiments"
+      }
+    ]
+  },
+  {
+    "id": "calamar-planxa",
+    "name": "Calamar a la planxa amb all i julivert",
+    "seasons": [
+      "primavera",
+      "estiu",
+      "tardor",
+      "hivern"
+    ],
+    "slots": [
+      "dinar",
+      "sopar"
+    ],
+    "servingsBase": 2,
+    "course": [
+      "segon"
+    ],
+    "tags": [
+      "peix"
+    ],
+    "ingredients": [
+      {
+        "item": "calamar",
+        "qty": 400,
+        "unit": "g",
+        "category": "peix-carn",
+        "scalable": true
       },
       {
-        "item": "xampinyons",
-        "qty": 250,
-        "unit": "g",
-        "category": "verdura-fruita",
-        "scalable": true
+        "item": "all",
+        "qty": 2,
+        "unit": "dent",
+        "category": "verdura-fruita"
+      },
+      {
+        "item": "julivert",
+        "qty": 1,
+        "unit": "grapat",
+        "category": "herbes-condiments"
       }
     ]
   },
@@ -156,7 +191,7 @@
   },
   {
     "id": "amanida-completa",
-    "name": "Amanida completa (enciam, llegums, tomàquet, pebrot)",
+    "name": "Amanida completa (enciam, cigrons, tomàquet)",
     "seasons": [
       "primavera",
       "estiu",
@@ -177,14 +212,14 @@
     ],
     "ingredients": [
       {
-        "item": "enciam o fulla verda",
+        "item": "fulla verda",
         "qty": 1,
-        "unit": "u",
+        "unit": "bossa",
         "category": "verdura-fruita",
         "scalable": true
       },
       {
-        "item": "llegums cuits",
+        "item": "cigrons cuits",
         "qty": 200,
         "unit": "g",
         "category": "llegums-cereals",
@@ -196,19 +231,12 @@
         "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
-      },
-      {
-        "item": "pebrot",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
       }
     ]
   },
   {
-    "id": "gaspatxo-alvocat",
-    "name": "Gaspatxo amb alvocat",
+    "id": "gaspatxo",
+    "name": "Gaspatxo",
     "seasons": [
       "estiu"
     ],
@@ -227,45 +255,11 @@
     ],
     "ingredients": [
       {
-        "item": "tomàquets",
-        "qty": 800,
-        "unit": "g",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "ceba fresca",
-        "qty": 0.25,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "all",
+        "item": "gaspatxo preparat",
         "qty": 1,
-        "unit": "dent",
-        "category": "verdura-fruita"
-      },
-      {
-        "item": "pebrot verd",
-        "qty": 0.25,
-        "unit": "u",
-        "category": "verdura-fruita",
+        "unit": "envàs",
+        "category": "altres",
         "scalable": true
-      },
-      {
-        "item": "alvocat",
-        "qty": 2,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "oli d'oliva verge extra",
-        "qty": 100,
-        "unit": "ml",
-        "category": "herbes-condiments",
-        "scalable": false
       }
     ]
   },
@@ -291,7 +285,7 @@
     ],
     "ingredients": [
       {
-        "item": "pit de pollastre",
+        "item": "cuixa desossada de pollastre",
         "qty": 400,
         "unit": "g",
         "category": "peix-carn",
@@ -300,123 +294,8 @@
     ]
   },
   {
-    "id": "crema-freda-cogombre-alvocat",
-    "name": "Crema freda de cogombre i alvocat",
-    "seasons": [
-      "estiu"
-    ],
-    "slots": [
-      "dinar",
-      "sopar"
-    ],
-    "servingsBase": 2,
-    "course": [
-      "primer"
-    ],
-    "tags": [
-      "crema",
-      "verdura",
-      "vegetaria"
-    ],
-    "ingredients": [
-      {
-        "item": "alvocat madur",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "cogombre",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "llimona",
-        "qty": 0.5,
-        "unit": "u",
-        "category": "verdura-fruita"
-      },
-      {
-        "item": "pebrot vermell",
-        "qty": 0.5,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      }
-    ]
-  },
-  {
-    "id": "quinoa-arros-verdures-fruits-secs",
-    "name": "Quinoa o arròs integral amb verdures saltejades i fruits secs",
-    "seasons": [
-      "primavera",
-      "estiu",
-      "tardor",
-      "hivern"
-    ],
-    "slots": [
-      "dinar"
-    ],
-    "servingsBase": 2,
-    "course": [
-      "primer"
-    ],
-    "tags": [
-      "llegum",
-      "verdura",
-      "vegetaria"
-    ],
-    "ingredients": [
-      {
-        "item": "quinoa o arròs integral",
-        "qty": 160,
-        "unit": "g",
-        "category": "llegums-cereals",
-        "scalable": true
-      },
-      {
-        "item": "carbassó",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "pebrot",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "ceba",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "pastanaga",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "fruits secs",
-        "qty": 1,
-        "unit": "grapat",
-        "category": "fruits-secs-llavors",
-        "scalable": true
-      }
-    ]
-  },
-  {
-    "id": "remenat-xampinyons-carbasso",
-    "name": "Remenat de xampinyons o carbassó",
+    "id": "remenat-xampinyons",
+    "name": "Remenat de xampinyons",
     "seasons": [
       "primavera",
       "estiu",
@@ -443,9 +322,46 @@
         "scalable": true
       },
       {
-        "item": "xampinyons o carbassó",
+        "item": "xampinyons",
         "qty": 300,
         "unit": "g",
+        "category": "verdura-fruita",
+        "scalable": true
+      }
+    ]
+  },
+  {
+    "id": "remenat-carbasso",
+    "name": "Remenat de carbassó",
+    "seasons": [
+      "primavera",
+      "estiu",
+      "tardor"
+    ],
+    "slots": [
+      "dinar",
+      "sopar"
+    ],
+    "servingsBase": 2,
+    "course": [
+      "segon"
+    ],
+    "tags": [
+      "ou",
+      "verdura"
+    ],
+    "ingredients": [
+      {
+        "item": "ous",
+        "qty": 4,
+        "unit": "u",
+        "category": "lactics-ous",
+        "scalable": true
+      },
+      {
+        "item": "carbassó",
+        "qty": 2,
+        "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
       }
@@ -651,7 +567,7 @@
   },
   {
     "id": "amanida-canonge-tomaquet",
-    "name": "Amanida de canonge amb tomàquet, alvocat, poma i fruits secs + ou dur",
+    "name": "Amanida de canonge amb tomàquet, alvocat, poma i fruits secs",
     "seasons": [
       "primavera",
       "estiu",
@@ -667,12 +583,11 @@
     ],
     "tags": [
       "amanida",
-      "ou",
       "verdura"
     ],
     "ingredients": [
       {
-        "item": "canonges",
+        "item": "fulla verda",
         "qty": 1,
         "unit": "bossa",
         "category": "verdura-fruita",
@@ -700,67 +615,10 @@
         "scalable": true
       },
       {
-        "item": "ous",
-        "qty": 2,
-        "unit": "u",
-        "category": "lactics-ous",
-        "scalable": true
-      },
-      {
         "item": "fruits secs",
         "qty": 1,
         "unit": "grapat",
         "category": "fruits-secs-llavors",
-        "scalable": true
-      }
-    ]
-  },
-  {
-    "id": "llenties-estofades-verdures",
-    "name": "Llenties estofades o saltejades amb verdures",
-    "seasons": [
-      "tardor",
-      "hivern"
-    ],
-    "slots": [
-      "dinar"
-    ],
-    "servingsBase": 2,
-    "course": [
-      "primer"
-    ],
-    "tags": [
-      "llegum",
-      "verdura",
-      "vegetaria"
-    ],
-    "ingredients": [
-      {
-        "item": "llenties",
-        "qty": 200,
-        "unit": "g",
-        "category": "llegums-cereals",
-        "scalable": true
-      },
-      {
-        "item": "pastanaga",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "ceba",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "pebrot",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
         "scalable": true
       }
     ]
@@ -937,42 +795,6 @@
         "item": "espàrrecs verds",
         "qty": 1,
         "unit": "manat",
-        "category": "verdura-fruita",
-        "scalable": true
-      }
-    ]
-  },
-  {
-    "id": "hamburguesa",
-    "name": "Hamburguesa (de pollastre o vedella) amb bròquil",
-    "seasons": [
-      "primavera",
-      "estiu",
-      "tardor",
-      "hivern"
-    ],
-    "slots": [
-      "sopar"
-    ],
-    "servingsBase": 2,
-    "course": [
-      "segon"
-    ],
-    "tags": [
-      "carn"
-    ],
-    "ingredients": [
-      {
-        "item": "hamburgueses",
-        "qty": 2,
-        "unit": "u",
-        "category": "peix-carn",
-        "scalable": true
-      },
-      {
-        "item": "bròquil",
-        "qty": 1,
-        "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
       }
@@ -1164,50 +986,15 @@
     ],
     "ingredients": [
       {
-        "item": "alvocat",
-        "qty": 2,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "llima",
+        "item": "guacamole preparat",
         "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "ceba",
-        "qty": 0.25,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "tomàquet",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
+        "unit": "envàs",
+        "category": "altres",
         "scalable": true
       },
       {
         "item": "pastanaga",
         "qty": 2,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "api",
-        "qty": 2,
-        "unit": "branca",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "pebrot",
-        "qty": 1,
         "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
@@ -1297,7 +1084,7 @@
       {
         "item": "fulla verda",
         "qty": 1,
-        "unit": "u",
+        "unit": "bossa",
         "category": "verdura-fruita",
         "scalable": true
       },
@@ -1490,43 +1277,15 @@
     ],
     "ingredients": [
       {
-        "item": "cigrons cuits",
-        "qty": 200,
-        "unit": "g",
-        "category": "llegums-cereals",
-        "scalable": true
-      },
-      {
-        "item": "tahin",
+        "item": "hummus preparat",
         "qty": 1,
-        "unit": "cullerada",
-        "category": "herbes-condiments",
-        "scalable": false
-      },
-      {
-        "item": "llima",
-        "qty": 0.5,
-        "unit": "u",
-        "category": "verdura-fruita",
+        "unit": "envàs",
+        "category": "altres",
         "scalable": true
       },
       {
         "item": "pastanaga",
         "qty": 2,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "api",
-        "qty": 2,
-        "unit": "branca",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "pebrot",
-        "qty": 1,
         "unit": "u",
         "category": "verdura-fruita",
         "scalable": true
@@ -1591,7 +1350,7 @@
       {
         "item": "fulla verda",
         "qty": 1,
-        "unit": "u",
+        "unit": "bossa",
         "category": "verdura-fruita",
         "scalable": true
       },
@@ -1626,56 +1385,6 @@
     ]
   },
   {
-    "id": "crema-pastanaga-pesols-ou",
-    "name": "Crema de pastanaga i pèsols amb ou dur",
-    "seasons": [
-      "primavera",
-      "tardor",
-      "hivern"
-    ],
-    "slots": [
-      "sopar"
-    ],
-    "servingsBase": 4,
-    "course": [
-      "primer"
-    ],
-    "tags": [
-      "crema",
-      "verdura"
-    ],
-    "ingredients": [
-      {
-        "item": "pastanaga",
-        "qty": 4,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "pèsols",
-        "qty": 300,
-        "unit": "g",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "ceba",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "ous",
-        "qty": 2,
-        "unit": "u",
-        "category": "lactics-ous",
-        "scalable": true
-      }
-    ]
-  },
-  {
     "id": "amanida-verda",
     "name": "Amanida verda",
     "seasons": [
@@ -1699,9 +1408,9 @@
     ],
     "ingredients": [
       {
-        "item": "enciam o fulla verda",
+        "item": "fulla verda",
         "qty": 1,
-        "unit": "u",
+        "unit": "bossa",
         "category": "verdura-fruita",
         "scalable": true
       },
@@ -1990,7 +1699,7 @@
     ],
     "ingredients": [
       {
-        "item": "porros",
+        "item": "porro",
         "qty": 3,
         "unit": "u",
         "category": "verdura-fruita",
@@ -2013,13 +1722,12 @@
     ]
   },
   {
-    "id": "maire-planxa",
-    "name": "Maire a la planxa",
+    "id": "sardines-planxa",
+    "name": "Sardines a la planxa",
     "seasons": [
       "primavera",
       "estiu",
-      "tardor",
-      "hivern"
+      "tardor"
     ],
     "slots": [
       "dinar",
@@ -2034,11 +1742,17 @@
     ],
     "ingredients": [
       {
-        "item": "maire (peix)",
-        "qty": 400,
+        "item": "sardines",
+        "qty": 500,
         "unit": "g",
         "category": "peix-carn",
         "scalable": true
+      },
+      {
+        "item": "llimona",
+        "qty": 1,
+        "unit": "u",
+        "category": "verdura-fruita"
       }
     ]
   },
@@ -2228,16 +1942,16 @@
         "scalable": true
       },
       {
-        "item": "pit de pollastre",
+        "item": "cuixa desossada de pollastre",
         "qty": 300,
         "unit": "g",
         "category": "peix-carn",
         "scalable": true
       },
       {
-        "item": "enciam",
+        "item": "fulla verda",
         "qty": 0.5,
-        "unit": "u",
+        "unit": "bossa",
         "category": "verdura-fruita",
         "scalable": true
       },
@@ -2261,36 +1975,6 @@
         "unit": "cullerada",
         "category": "llegums-cereals",
         "scalable": false
-      }
-    ]
-  },
-  {
-    "id": "orada-forn",
-    "name": "Orada al forn",
-    "seasons": [
-      "primavera",
-      "estiu",
-      "tardor",
-      "hivern"
-    ],
-    "slots": [
-      "dinar",
-      "sopar"
-    ],
-    "servingsBase": 2,
-    "course": [
-      "segon"
-    ],
-    "tags": [
-      "peix"
-    ],
-    "ingredients": [
-      {
-        "item": "orada",
-        "qty": 2,
-        "unit": "u",
-        "category": "peix-carn",
-        "scalable": true
       }
     ]
   },
@@ -2332,8 +2016,8 @@
     ]
   },
   {
-    "id": "pollastre-rostit",
-    "name": "Pollastre rostit",
+    "id": "pollastre-forn",
+    "name": "Pollastre al forn",
     "seasons": [
       "primavera",
       "estiu",
@@ -2343,7 +2027,7 @@
     "slots": [
       "dinar"
     ],
-    "servingsBase": 2,
+    "servingsBase": 4,
     "course": [
       "segon"
     ],
@@ -2352,10 +2036,24 @@
     ],
     "ingredients": [
       {
-        "item": "pollastre",
-        "qty": 500,
-        "unit": "g",
+        "item": "cuixes de pollastre",
+        "qty": 4,
+        "unit": "u",
         "category": "peix-carn",
+        "scalable": true
+      },
+      {
+        "item": "ceba",
+        "qty": 2,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      },
+      {
+        "item": "patata",
+        "qty": 2,
+        "unit": "u",
+        "category": "verdura-fruita",
         "scalable": true
       }
     ]
@@ -2487,13 +2185,6 @@
         "unit": "u",
         "category": "peix-carn",
         "scalable": true
-      },
-      {
-        "item": "bròquil",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
       }
     ]
   },
@@ -2523,13 +2214,6 @@
         "qty": 2,
         "unit": "u",
         "category": "peix-carn",
-        "scalable": true
-      },
-      {
-        "item": "bròquil",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
         "scalable": true
       }
     ]
@@ -2711,13 +2395,6 @@
       },
       {
         "item": "carbassó",
-        "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "pebrot",
         "qty": 1,
         "unit": "u",
         "category": "verdura-fruita",
@@ -3310,17 +2987,17 @@
         "scalable": true
       },
       {
-        "item": "menta fresca",
+        "item": "cogombrets encurtits",
         "qty": 1,
         "unit": "grapat",
-        "category": "herbes-condiments",
-        "scalable": false
+        "category": "altres",
+        "scalable": true
       },
       {
-        "item": "all",
-        "qty": 0.5,
-        "unit": "dent",
-        "category": "verdura-fruita",
+        "item": "ametlles",
+        "qty": 1,
+        "unit": "grapat",
+        "category": "fruits-secs-llavors",
         "scalable": true
       }
     ]
@@ -3410,7 +3087,7 @@
     ],
     "ingredients": [
       {
-        "item": "llenties",
+        "item": "llenties cuites",
         "qty": 180,
         "unit": "g",
         "category": "llegums-cereals",
@@ -3569,11 +3246,10 @@
     ]
   },
   {
-    "id": "llenties-saltejades-verdures",
-    "name": "Llenties saltejades amb verdures",
+    "id": "carxofes-vapor",
+    "name": "Carxofes al vapor",
     "seasons": [
       "primavera",
-      "estiu",
       "tardor",
       "hivern"
     ],
@@ -3583,48 +3259,31 @@
     ],
     "servingsBase": 2,
     "course": [
-      "segon"
+      "primer"
     ],
     "tags": [
-      "llegum",
       "verdura",
       "vegetaria"
     ],
     "ingredients": [
       {
-        "item": "llenties cuites",
-        "qty": 350,
-        "unit": "g",
-        "category": "llegums-cereals",
+        "item": "carxofes",
+        "qty": 4,
+        "unit": "u",
+        "category": "verdura-fruita",
         "scalable": true
       },
       {
-        "item": "pebrot",
+        "item": "llimona",
         "qty": 1,
         "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
+        "category": "verdura-fruita"
       },
       {
-        "item": "mongeta verda",
-        "qty": 200,
-        "unit": "g",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "ceba",
+        "item": "all",
         "qty": 1,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
-      },
-      {
-        "item": "bròquil",
-        "qty": 0.5,
-        "unit": "u",
-        "category": "verdura-fruita",
-        "scalable": true
+        "unit": "dent",
+        "category": "verdura-fruita"
       }
     ]
   }

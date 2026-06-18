@@ -49,7 +49,7 @@ export function buildGroceryList(menu: WeeklyMenu): Record<GroceryCategory, Groc
         } else {
           acc.set(key, {
             item: ing.item,
-            qty: addQty != null ? round(addQty) : undefined,
+            qty: addQty,
             unit: ing.unit,
             category: ing.category,
           })
@@ -61,15 +61,12 @@ export function buildGroceryList(menu: WeeklyMenu): Record<GroceryCategory, Groc
 
   const grouped = {} as Record<GroceryCategory, GroceryItem[]>
   for (const it of acc.values()) {
-    if (it.qty != null) it.qty = round(it.qty)
+    // Round the shopping quantity up to a whole unit (you can't buy half an onion).
+    if (it.qty != null) it.qty = Math.ceil(it.qty)
     ;(grouped[it.category] ??= []).push(it)
   }
   for (const cat of Object.keys(grouped) as GroceryCategory[]) {
     grouped[cat].sort((a, b) => a.item.localeCompare(b.item))
   }
   return grouped
-}
-
-function round(n: number): number {
-  return Math.round(n * 100) / 100
 }

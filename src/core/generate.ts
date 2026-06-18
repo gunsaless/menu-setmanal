@@ -11,12 +11,29 @@ function chosenIds(days: PlannedDay[]): string[] {
     .filter(Boolean) as string[]
 }
 
+const PROTEIN_TAGS = ['peix', 'carn', 'ou', 'llegum'] as const
+
+/** Which protein tags a dish carries (used to vary protein across the day). */
+function proteinTags(dishId: string | null): string[] {
+  if (!dishId) return []
+  const d = dishById(dishId)
+  return d ? d.tags.filter((t) => (PROTEIN_TAGS as readonly string[]).includes(t)) : []
+}
+
+interface PickOpts {
+  /** Protein tags to avoid (e.g. the one already used at lunch). */
+  avoidProteins?: string[]
+  /** A protein tag to favour (e.g. egg at dinner). */
+  preferProtein?: string
+}
+
 /** Deterministic-but-shuffled pick driven by a seed so reruns vary. */
 function pickWeighted(
   pool: Dish[],
   usedIds: string[],
   recentTags: string[],
   seed: number,
+  opts: PickOpts = {},
 ): Dish | null {
   if (pool.length === 0) return null
   const scored = pool.map((d, i) => {
@@ -25,6 +42,8 @@ function pickWeighted(
     // penalise repeating the same primary tag as recent days (variety)
     if (d.tags.some((t) => recentTags.includes(t))) score -= 0.3
     if (d.free) score -= 0.5 // keep "lliure" rare unless forced
+    // favour a preferred protein (egg at dinner)
+    if (opts.preferProtein && (d.tags as string[]).includes(opts.preferProtein)) score += 0.4
     // pseudo-random jitter from seed so rerolls differ
     const jitter = (Math.sin((seed + i) * 12.9898) * 43758.5453) % 1
     return { d, score: score + Math.abs(jitter) * 0.5 }
@@ -61,9 +80,16 @@ function fixedMeal(
   // Sunday dinner, at least one at home → caldo/gaspatxo + pinya, by season.
   if (dow === SUN && attendees.length >= 1) {
     const cold = season === 'hivern' || season === 'tardor'
-    return { primerId: cold ? 'caldo-verdures' : 'gaspatxo-alvocat', segonId: 'pinya-natural' }
+    return { primerId: cold ? 'caldo-verdures' : 'gaspatxo', segonId: 'pinya-natural' }
   }
   return null
+}
+
+/** Drop reserved dishes from a pool, but never empty it. */
+function withoutReserved(pool: Dish[], reserved: Set<string>): Dish[] {
+  if (!reserved.size) return pool
+  const filtered = pool.filter((d) => !reserved.has(d.id))
+  return filtered.length ? filtered : pool
 }
 
 function planMeal(
@@ -75,14 +101,22 @@ function planMeal(
   recentTags: string[],
   seed: number,
   peopleCount: number,
+  reserved: Set<string>,
+  segonOpts: PickOpts = {},
 ): PlannedMeal {
   if (attendees.length === 0) return { slot, attendees, primerId: null, segonId: null }
   const fixed = fixedMeal(date, slot, attendees, season, peopleCount)
   if (fixed) return { slot, attendees, ...fixed }
-  const primer = pickWeighted(poolFor(season, slot, 'primer'), usedIds, recentTags, seed)
+  const primer = pickWeighted(withoutReserved(poolFor(season, slot, 'primer'), reserved), usedIds, recentTags, seed)
   // Exclude the just-picked starter so the main is a different dish.
   const segonUsed = primer ? [...usedIds, primer.id] : usedIds
-  const segon = pickWeighted(poolFor(season, slot, 'segon'), segonUsed, recentTags, seed + 1)
+  // Hard-avoid the other meal's protein (fall back to the full pool if needed).
+  let segonPool = withoutReserved(poolFor(season, slot, 'segon'), reserved)
+  if (segonOpts.avoidProteins?.length) {
+    const filtered = segonPool.filter((d) => !d.tags.some((t) => segonOpts.avoidProteins!.includes(t)))
+    if (filtered.length) segonPool = filtered
+  }
+  const segon = pickWeighted(segonPool, segonUsed, recentTags, seed + 1, segonOpts)
   return { slot, attendees, primerId: primer?.id ?? null, segonId: segon?.id ?? null }
 }
 
@@ -99,15 +133,27 @@ export function generateMenu(
   const days: PlannedDay[] = []
   let seed = baseSeed
 
+  // Dishes the fixed rules will place (Monday, Sunday) are reserved so the
+  // random picks don't repeat them elsewhere in the week.
+  const reserved = new Set<string>()
+  for (const day of attendance) {
+    const f = fixedMeal(day.date, 'sopar', day.sopar, season, peopleCount)
+    if (f) { reserved.add(f.primerId); reserved.add(f.segonId) }
+  }
+
   for (const day of attendance) {
     const recentTags = chosenIds(days.slice(-2)).flatMap(
       (id) => dishById(id)?.tags ?? [],
     )
 
-    const dinar = planMeal(day.date, 'dinar', day.dinar, season, usedIds, recentTags, seed, peopleCount)
+    const dinar = planMeal(day.date, 'dinar', day.dinar, season, usedIds, recentTags, seed, peopleCount, reserved)
     seed += 2
     usedIds.push(...[dinar.primerId, dinar.segonId].filter(Boolean) as string[])
-    const sopar = planMeal(day.date, 'sopar', day.sopar, season, usedIds, recentTags, seed, peopleCount)
+    // Dinner avoids lunch's protein and prefers egg.
+    const sopar = planMeal(day.date, 'sopar', day.sopar, season, usedIds, recentTags, seed, peopleCount, reserved, {
+      avoidProteins: proteinTags(dinar.segonId),
+      preferProtein: 'ou',
+    })
     seed += 2
     usedIds.push(...[sopar.primerId, sopar.segonId].filter(Boolean) as string[])
 

@@ -23,8 +23,10 @@ function CourseRow(
     <div className="course">
       <span className="course-label">{cap}</span>
       <span className="course-name">{dish?.name ?? '—'}</span>
-      <button className="reroll" title={`Canviar ${course} a l'atzar`} onClick={() => reroll(date, slot, course)}>🎲</button>
-      <button className="reroll" title={`Triar ${course}`} onClick={() => setPicking(true)}>✏️</button>
+      <span className="course-actions">
+        <button className="reroll" title={`Canviar ${course} a l'atzar`} onClick={() => reroll(date, slot, course)}>🎲</button>
+        <button className="reroll" title={`Triar ${course}`} onClick={() => setPicking(true)}>✏️</button>
+      </span>
       {picking && (
         <DishPicker
           course={course}
@@ -45,9 +47,11 @@ function MealCell({ date, slot, meal }: { date: string; slot: Slot; meal: Planne
     <div className="meal">
       <CourseRow date={date} slot={slot} course="primer" dishId={meal.primerId} />
       <CourseRow date={date} slot={slot} course="segon" dishId={meal.segonId} />
-      <span className="who" title={meal.attendees.map(nameOf).join(' + ')}>
-        {meal.attendees.map((p) => nameOf(p)[0]?.toUpperCase()).join('+')}
-      </span>
+      <div className="meal-foot">
+        <span className="who" title={meal.attendees.map(nameOf).join(' + ')}>
+          {meal.attendees.map((p) => nameOf(p)[0]?.toUpperCase()).join('+')}
+        </span>
+      </div>
     </div>
   )
 }
