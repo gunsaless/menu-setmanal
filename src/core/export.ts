@@ -50,17 +50,28 @@ export function menuToText(menu: WeeklyMenu, people: PersonInfo[] = DEFAULT_PEOP
 
 /**
  * WhatsApp-friendly plain-text grocery list.
- * Items whose key is in `checked` (already-have-it) are omitted, and any
- * category left empty is dropped entirely.
+ * Items whose key is in `checked` (already-have-it) are omitted. When
+ * `grouped` is true (default) items are split by category; otherwise a single
+ * flat alphabetical list is returned.
  */
-export function groceryToText(menu: WeeklyMenu, checked?: Set<string>): string {
-  const grouped = buildGroceryList(menu)
+export function groceryToText(menu: WeeklyMenu, checked?: Set<string>, grouped = true): string {
+  const groups = buildGroceryList(menu)
   const lines = ['🛒 *LLISTA DE LA COMPRA*', '']
-  for (const cat of Object.keys(grouped) as GroceryCategory[]) {
-    const items = grouped[cat].filter((it) => !checked?.has(groceryKey(it)))
+
+  if (!grouped) {
+    const items = (Object.values(groups).flat() as GroceryItem[])
+      .filter((it) => !checked?.has(groceryKey(it)))
+      .sort((a, b) => a.item.localeCompare(b.item))
+    // Leading "* " makes WhatsApp render it as a bulleted list.
+    for (const it of items) lines.push(`* ${fmtItem(it)}`)
+    return lines.join('\n').trim()
+  }
+
+  for (const cat of Object.keys(groups) as GroceryCategory[]) {
+    const items = groups[cat].filter((it) => !checked?.has(groceryKey(it)))
     if (items.length === 0) continue
     lines.push(`*${CATEGORY_LABELS[cat]}*`)
-    for (const it of items) lines.push(`  • ${fmtItem(it)}`)
+    for (const it of items) lines.push(`* ${fmtItem(it)}`)
     lines.push('')
   }
   return lines.join('\n').trim()

@@ -290,15 +290,15 @@ describe('groceryToText', () => {
     const items = Object.values(buildGroceryList(menu)).flat()
     const allKeys = new Set(items.map(groceryKey))
 
+    const bullets = (t: string) => (t.match(/^\* /gm) ?? []).length // lines starting "* "
     const full = groceryToText(menu)
-    const fullBullets = (full.match(/•/g) ?? []).length
-    expect(fullBullets).toBe(items.length)
+    expect(bullets(full)).toBe(items.length)
 
     // Checking one item drops exactly one bullet line.
     const oneChecked = groceryToText(menu, new Set([groceryKey(items[0])]))
-    expect((oneChecked.match(/•/g) ?? []).length).toBe(items.length - 1)
+    expect(bullets(oneChecked)).toBe(items.length - 1)
 
     // Checking everything leaves no items (no bullets).
-    expect((groceryToText(menu, allKeys).match(/•/g) ?? []).length).toBe(0)
+    expect(bullets(groceryToText(menu, allKeys))).toBe(0)
   })
 })

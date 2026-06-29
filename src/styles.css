@@ -91,7 +91,8 @@ table.menu td { text-align: left; vertical-align: top; }
 /* Keep white text legible on hover for accent-coloured buttons. */
 .rule-fix:hover, button.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
 .export { display: flex; flex-direction: column; gap: 1rem; }
-.copybox .row { justify-content: space-between; margin: 0 0 .4rem; }
+.copybox .row { margin: 0 0 .4rem; }
+.copybox .row strong { margin-right: auto; }
 .copybox textarea { width: 100%; font-family: ui-monospace, monospace; font-size: .85rem; border: 1px solid var(--line); border-radius: 8px; padding: .75rem; resize: vertical; background: var(--card); color: var(--ink); }
 
 /* ── Mobile ─────────────────────────────────────────────────────────────── */
