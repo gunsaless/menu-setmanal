@@ -57,8 +57,8 @@ describe('same-day protein variety', () => {
   }
 
   it('lunch and dinner mains do not share the same protein', () => {
-    // Tue–Fri (avoids the fixed Monday/Sunday dinners), both at home.
-    const att: AttendanceDay[] = ['2026-06-16', '2026-06-17', '2026-06-18', '2026-06-19'].map((date) => ({
+    // Tue–Thu (avoids the fixed Monday/Friday/Sunday dinners), both at home.
+    const att: AttendanceDay[] = ['2026-06-16', '2026-06-17', '2026-06-18'].map((date) => ({
       date, dinar: ['adria', 'helena'], sopar: ['adria', 'helena'],
     }))
     const menu = generateMenu(att, 99)
@@ -125,6 +125,15 @@ describe('default fixed meals', () => {
     const menu = generateMenu(att, 7)
     expect(menu.days[0].sopar.primerId).toBe('gaspatxo')
     expect(menu.days[0].sopar.segonId).toBe('pinya-natural')
+  })
+
+  it('Friday dinner with ≥1 home → hummus amb pastanaga + smash burger', () => {
+    const att: AttendanceDay[] = [
+      { date: '2026-06-19', dinar: [], sopar: ['adria'] }, // Friday
+    ]
+    const menu = generateMenu(att, 7)
+    expect(menu.days[0].sopar.primerId).toBe('hummus-pastanaga')
+    expect(menu.days[0].sopar.segonId).toBe('smash-burger')
   })
 
   it('Sunday dinner (winter) with ≥1 home → caldo + pinya', () => {

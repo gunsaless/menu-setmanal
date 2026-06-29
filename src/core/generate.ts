@@ -59,6 +59,7 @@ function weekday(iso: string): number {
 }
 const SUN = 0
 const MON = 1
+const FRI = 5
 
 /**
  * Default fixed meals (the "first option" the generator proposes). The user can
@@ -81,6 +82,10 @@ function fixedMeal(
   if (dow === SUN && attendees.length >= 1) {
     const cold = season === 'hivern' || season === 'tardor'
     return { primerId: cold ? 'caldo-verdures' : 'gaspatxo', segonId: 'pinya-natural' }
+  }
+  // Friday dinner, at least one at home → hummus amb pastanaga + smash burger.
+  if (dow === FRI && attendees.length >= 1) {
+    return { primerId: 'hummus-pastanaga', segonId: 'smash-burger' }
   }
   return null
 }

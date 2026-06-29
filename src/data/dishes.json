@@ -3300,5 +3300,108 @@
         "category": "verdura-fruita"
       }
     ]
+  },
+  {
+    "id": "hummus-pastanaga",
+    "name": "Hummus amb pastanaga",
+    "seasons": [
+      "primavera",
+      "estiu",
+      "tardor",
+      "hivern"
+    ],
+    "slots": [
+      "dinar",
+      "sopar"
+    ],
+    "servingsBase": 2,
+    "course": [
+      "primer"
+    ],
+    "tags": [
+      "llegum",
+      "vegetaria"
+    ],
+    "ingredients": [
+      {
+        "item": "hummus preparat",
+        "qty": 1,
+        "unit": "envàs",
+        "category": "altres",
+        "scalable": true
+      },
+      {
+        "item": "pastanaga",
+        "qty": 2,
+        "unit": "u",
+        "category": "verdura-fruita",
+        "scalable": true
+      }
+    ]
+  },
+  {
+    "id": "smash-burger",
+    "name": "Smash burger",
+    "seasons": [
+      "primavera",
+      "estiu",
+      "tardor",
+      "hivern"
+    ],
+    "slots": [
+      "dinar",
+      "sopar"
+    ],
+    "servingsBase": 2,
+    "course": [
+      "segon"
+    ],
+    "tags": [
+      "carn"
+    ],
+    "ingredients": [
+      {
+        "item": "hamburguesa de vedella",
+        "qty": 2,
+        "unit": "u",
+        "category": "peix-carn",
+        "scalable": true
+      },
+      {
+        "item": "pa de briox",
+        "qty": 2,
+        "unit": "u",
+        "category": "llegums-cereals",
+        "scalable": true
+      },
+      {
+        "item": "bacó",
+        "qty": 4,
+        "unit": "llesca",
+        "category": "peix-carn",
+        "scalable": true
+      },
+      {
+        "item": "formatge cheddar",
+        "qty": 2,
+        "unit": "llesca",
+        "category": "lactics-ous",
+        "scalable": true
+      },
+      {
+        "item": "cogombres agredolços",
+        "qty": 1,
+        "unit": "grapat",
+        "category": "altres",
+        "scalable": true
+      },
+      {
+        "item": "salsa burger",
+        "qty": 1,
+        "unit": "envàs",
+        "category": "altres",
+        "scalable": false
+      }
+    ]
   }
 ]
